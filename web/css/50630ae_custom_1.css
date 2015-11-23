@@ -24,6 +24,10 @@ h2.h2{
     box-sizing: border-box;
 }
 
+a{
+    color: #2699D6;
+}
+
 /*========================= forms ==*/
 .label100, .group-100{
     width: 100%;
@@ -38,6 +42,10 @@ h2.h2{
     margin-top: 5px;
     box-sizing: border-box;
     border-radius: 9px;
+}
+
+textarea.input100{
+    min-height: 150px;
 }
 
 .button{
@@ -167,16 +175,22 @@ ul.base-menu li a.active:hover{
 
 /*=================== login container */
 
-.login-container{
+.login-container, .register-container{
     max-width: 500px;
     width: 100%;
     margin: 0 auto;
 }
 
+/*================= Register */
 
+.register-container{
+    max-width: 700px;
+}
 
-
-
+.register-container a, .login-container a{
+    margin-left: 15px;
+    text-decoration: none;
+}
 
 
 
