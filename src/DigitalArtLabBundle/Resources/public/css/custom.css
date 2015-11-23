@@ -1,3 +1,211 @@
-body p{
-    color: red !important;
+*{
+    margin: 0;
+    padding: 0;
 }
+
+body{
+    background: url('../../../web/bundles/digitalartlab/images/background.jpg') repeat;
+    font-family: 'open sans';
+}
+.clear{
+    clear: both;
+}
+
+/*========================= Fonts ==*/
+h2.h2{
+    font-size: 36px;
+    text-transform:  uppercase;
+    background: #2699D6;
+    text-align: center;
+    color: #fff;
+    margin: 50px 0 25px 0;
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/*========================= forms ==*/
+.label100, .group-100{
+    width: 100%;
+    padding: 8px 5px 0px 0;
+    box-sizing: border-box;
+    float: left;
+}
+
+.input100{
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border-radius: 9px;
+}
+
+.button{
+    padding: 10px 40px;
+    color: #fff;
+    background: #2699D6;
+    text-align: center;
+    border: 0px;
+    font-size: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.btn-fill{
+   padding: 20px 0 50px 0;
+    width: 100%;
+}
+
+.error{
+    color: #fff;
+    padding: 5px 20px;
+    background: #440012;
+    float: left;
+}
+
+/*========================= Menu ==*/
+.menu{
+    width: 100%;
+    padding: 20px 45px;
+    box-sizing: border-box;
+    background: #222;
+    float: left;
+}
+
+.logo{
+    background: url('../../../web/bundles/digitalartlab/images/logo-ckc.svg') left center no-repeat;
+    width: 118px;
+    height: 87px;
+    display: block;
+    color: transparent;
+    float: left;
+}
+
+ul.base-menu{
+    float: right;
+    padding: 30px 0 30px 30px;
+}
+
+ul.base-menu li{
+    float: left;
+    list-style-type: none;
+    font-size: 20px;
+}
+
+ul.base-menu li a{
+    color: #ffeb00;
+    padding: 7px 10px;
+    display: block;
+    text-decoration: none;
+}
+
+ul.base-menu li a.active{
+    background: #ffeb00;
+    color: #222;
+}
+
+ul.base-menu li a:hover{
+    background: #333;
+}
+
+ul.base-menu li a.active:hover{
+    background: #ffeb00;
+}
+
+/*========================= header ==*/
+
+.header{
+    width: 100%;
+    height: 150px;
+    position: relative;
+}
+
+.header-1{
+    background: url('../../../web/bundles/digitalartlab/images/header-1.jpg')repeat;
+}
+
+.img-header{
+    width: auto;
+    max-height: 120px;
+    position: absolute;
+    left: 50%;
+    margin-left: -45px;
+    top: 15px;
+    
+}
+
+/*========================== base */
+
+.container{
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1440px;
+    background: #fff;
+}
+
+
+
+/*========================responsive base */
+
+@media (max-width: 1440px) {
+    .container{
+        max-width: 1200px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .container{
+        max-width: 1000px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .container{
+        max-width: 800px;
+    }
+}
+
+/*=================== login container */
+
+.login-container{
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

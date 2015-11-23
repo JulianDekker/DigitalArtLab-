@@ -23,12 +23,6 @@ class checkin
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="checkin")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    protected $user;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=255)
@@ -46,14 +40,14 @@ class checkin
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="timeout", type="datetime")
+     * @ORM\Column(name="timeout", type="datetime", nullable=true)
      */
     private $timeout;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="sessionduration", type="time")
+     * @ORM\Column(name="sessionduration", type="datetime", nullable=true)
      */
     private $sessionduration;
 

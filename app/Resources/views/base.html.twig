@@ -13,7 +13,30 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+    <div class="menu">
+       <div class="container">
+           <div class="logo"></div>
+            <ul class="base-menu">
+                <li><a href="{{ path('homepage') }}" class="active">Home</a></li>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li><a href="{{ path('fos_user_profile_show') }}">Mijn profiel</a> </li>
+                {% else %}
+                    <li><a href="{{ path('fos_user_security_login') }}">Inloggen</a></li>
+                {% endif %}
+
+            </ul>
+       </div>
+    </div>
+    <div class="clear"></div>
+    {% block header %}
+        <div class="header header-1">
+
+        </div>
+    {% endblock %}
+    <div class="clear"></div>
+    <div class="container body">
         {% block body %}{% endblock %}
+    </div>
         {% block javascripts %}
             {% javascripts
             '%kernel.root_dir%/../vendor/components/jquery/jquery.js'

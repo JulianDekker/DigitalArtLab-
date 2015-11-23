@@ -21,7 +21,7 @@ class DefaultController extends Controller
      * @Route("/profile/{username}")
      * @Template()
      */
-    public function showOtherAction($username){
+    /*public function showOtherAction($username){
 
         $em = $this->get('doctrine')->getManager();
         $user = $em->getRepository('DigitalArtLabBundle:User')->findOneByUsername($username);
@@ -30,5 +30,5 @@ class DefaultController extends Controller
             'user' => $user
         ));
 
-    }
+    }*/
 }

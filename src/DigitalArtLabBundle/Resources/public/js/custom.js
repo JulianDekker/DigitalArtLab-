@@ -14,7 +14,9 @@ $(document).ready(function(){
     });
 
 
-
+    var viewheight = $(document).height();
+    var containerheight = viewheight - 141 - 150;
+    $('.container.body').css({"min-height" : containerheight+"px" });
 
 
 });

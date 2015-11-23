@@ -9,7 +9,7 @@ Use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="DigitalArtLabBundle\Entity\UserRepository")
  * @ORM\Table(name="fos_user")
  */
 class User extends BaseUser
@@ -22,11 +22,6 @@ class User extends BaseUser
      */
     protected $id;
 
-
-    /**
-     * @ORM\OneToMany(targetEntity="checkin", mappedBy="User")
-     */
-    protected $checkin;
 
     /**
      * @Assert\NotBlank(message="Please enter your name.", groups={"Registration", "Profile"})

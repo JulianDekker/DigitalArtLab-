@@ -1,47 +1,11 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>checkin list</h1>
 
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Username</th>
-                <th>Timein</th>
-                <th>Timeout</th>
-                <th>Sessionduration</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('profile_checkin_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.username }}</td>
-                <td>{% if entity.timein %}{{ entity.timein|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.timeout %}{{ entity.timeout|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.sessionduration }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('profile_checkin_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('profile_checkin_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% if user.aanwezig == 1 %}
+        <h1>Welkom {{ user.firstname }} {{ user.lastname }}</h1>
+    {% else %}
+        <h1>Succesvol Afgemeld</h1>
+    {% endif %}
 
-        <ul>
-        <li>
-            <a href="{{ path('profile_checkin_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+{% endblock %}
