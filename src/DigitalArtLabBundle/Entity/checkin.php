@@ -45,9 +45,9 @@ class checkin
     private $timeout;
 
     /**
-     * @var \DateTime
+     * @var \Time
      *
-     * @ORM\Column(name="sessionduration", type="datetime", nullable=true)
+     * @ORM\Column(name="sessionduration", type="time", nullable=true)
      */
     private $sessionduration;
 
