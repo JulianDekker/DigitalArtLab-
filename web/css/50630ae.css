@@ -151,6 +151,21 @@ ul.base-menu li a.active:hover{
     background: #fff;
 }
 
+.content-container{
+    width: 100%;
+    padding: 0 45px 0 45px;
+    box-sizing: border-box;
+}
+
+.main-content{
+    width: 75%;
+    padding-right: 20px;
+    box-sizing: border-box;
+}
+
+.side-content{
+    width: 25%;
+}
 
 
 /*========================responsive base */
@@ -191,6 +206,10 @@ ul.base-menu li a.active:hover{
     margin-left: 15px;
     text-decoration: none;
 }
+
+/*================ profile */
+
+
 
 
 
