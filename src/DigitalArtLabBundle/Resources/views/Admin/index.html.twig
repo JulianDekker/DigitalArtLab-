@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <div class="infoblocks-container">
+        <div class="infoblock">
+            <a href="{{ path('admin_usermanager') }}">Gebruikersbeheer</a>
+        </div>
+        <div class="infoblock">
+            <a href="{{ path('fos_user_registration_register') }}">gebruikers toevoegen</a>
+        </div>
+        <div class="infoblock">
+            <a href="">statestieken</a>
+        </div>
+    </div>
+    <div class="side-container">
+        <div class="peoplenline">
+            <p>{{ aanwezig|length }}</p>
+            <p>aanwezig</p>
+        </div>
+    </div>
+
+
+
+{% endblock %}

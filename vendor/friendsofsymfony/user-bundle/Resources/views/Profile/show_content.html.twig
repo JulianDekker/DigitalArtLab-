@@ -1,0 +1,43 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="content-container">
+    <div class="main-content">
+        <h2 class="h2">{{ user.username }}'s profiel</h2>
+        <div class="fos_user_user_show">
+            <p class="title">Gebruikersnaam:</p>
+            <p class="row">{{ user.username }}</p>
+            <p class="title">Volledige naam:</p>
+            <p class="row">{{ user.firstname }} {{ user.lastname }}</p>
+            <p class="title">Email:</p>
+            <p class="row">{{ user.email }}</p>
+            <p class="title">expertises:</p>
+            <p class="row">{{ user.expertises }}</p>
+            <p class="title">interesses:</p>
+            <p class="row">{{ user.interesses }}</p>
+            <p class="title">Status:</p>
+            <p class="row">
+                {% if user.aanwezig == 1 %}
+                    In het lab
+                {% elseif user.aanwezig is null or user.aanwezig is empty %}
+                    nog niet in het lab geweest
+                {% elseif user.aanwezig == 0 %}
+                    Niet aanwezig
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    <div class="side-content">
+        <h2 class="h2">Stats</h2>
+        {% if is_granted('ROLE_ADMIN') or user.username == app.user.username %}
+            {% if ses %}
+                <h2 class="h2">Sessies</h2>
+                {% for sessions in ses %}
+                    {% if sessions.timeout is null or sessions.timeout is empty %}
+                        <p>Aanwezig sinds {% if sessions.timein|date('d-m-Y') == "now"|date('d-m-Y') %}vandaag{% else %}{{ sessions.timein|date('d-m-Y') }} om{% endif %} {{ sessions.timein|date('H:i') }}</p></br>
+                    {% else %}
+                        <p>In het lab geweest op {{sessions.timein|date('d-m-Y')}} voor {{ sessions.sessionduration|date('H:i:s') }}</p></br>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    </div>
+</div>

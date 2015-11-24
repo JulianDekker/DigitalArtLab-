@@ -1,0 +1,11 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="register-container">
+    <h2 class="h2">Registreren bij het lab</h2>
+
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+    {{ form_widget(form) }}
+    <div class="btn-fill">
+        <input type="submit" value="Registreren" class="button" /> <a href="{{ path('fos_user_security_login') }}">Ik heb al een account.</a>
+    </div>
+{{ form_end(form) }}
+</div>

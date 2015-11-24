@@ -1,0 +1,10 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <div class="login-container">
+        <h2 class="h2">Registratie succes</h2>
+        <a href="{{ path('homepage') }}">terug naar de homepage</a>
+    </div>
+{% endblock fos_user_content %}
