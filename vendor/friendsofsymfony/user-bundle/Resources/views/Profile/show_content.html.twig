@@ -27,6 +27,29 @@
     </div>
     <div class="side-content">
         <h2 class="h2">Stats</h2>
+        {% set sumratingsH = '0' %}
+        {% set sumratingsi = '0' %}
+        {% set sumratingss = '0' %}
+        {% for session in ses %}
+            {% set sumratingsH = sumratingsH + session.sessionduration|date('H') / ses|length %}
+            {% set sumratingsi = sumratingsi + session.sessionduration|date('i') / ses|length %}
+            {% set sumratingss = sumratingss + session.sessionduration|date('s') / ses|length %}
+        {% endfor %}
+        {% set sumratingshl = (sumratingsH - sumratingsH|round(0, 'floor')) *60 %}
+        {% set sumratingsi = sumratingsi + sumratingshl %}
+        {%  if sumratingsi > 60 %}
+            {% set sumratingsi = sumratingsi / 60 %}
+            {% set sumratingsH = sumratingsH + sumratingsi|round(0, 'floor') %}
+            {% set sumratingsi = (sumratingsi - sumratingsi|round(0, 'floor')) *60 %}
+        {% endif %}
+        {% set sumratingsil = (sumratingsi - sumratingsi|round(0, 'floor')) *60 %}
+        {% set sumratingss = sumratingss + sumratingsil %}
+        {%  if sumratingss > 60 %}
+            {% set sumratingss = sumratingss / 60 %}
+            {% set sumratingsi = sumratingsi + sumratingss|round(0, 'floor') %}
+            {% set sumratingss = (sumratingss - sumratingss|round(0, 'floor')) *60 %}
+        {% endif %}
+        <p>Gemiddelde sessieduur: {{  sumratingsH|round(0, 'floor') }}:{{  "%02d"|format(sumratingsi|round(0, 'floor')) }}:{{  "%02d"|format(sumratingss|round)  }}</p>
         {% if is_granted('ROLE_ADMIN') or user.username == app.user.username %}
             {% if ses %}
                 <h2 class="h2">Sessies</h2>
