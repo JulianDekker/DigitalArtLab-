@@ -31,9 +31,11 @@
         {% set sumratingsi = '0' %}
         {% set sumratingss = '0' %}
         {% for session in ses %}
-            {% set sumratingsH = sumratingsH + session.sessionduration|date('H') / ses|length %}
-            {% set sumratingsi = sumratingsi + session.sessionduration|date('i') / ses|length %}
-            {% set sumratingss = sumratingss + session.sessionduration|date('s') / ses|length %}
+            {% if session.sessionduration %}
+                {% set sumratingsH = sumratingsH + session.sessionduration|date('H') / ses|length %}
+                {% set sumratingsi = sumratingsi + session.sessionduration|date('i') / ses|length %}
+                {% set sumratingss = sumratingss + session.sessionduration|date('s') / ses|length %}
+            {% endif %}
         {% endfor %}
         {% set sumratingshl = (sumratingsH - sumratingsH|round(0, 'floor')) *60 %}
         {% set sumratingsi = sumratingsi + sumratingshl %}
