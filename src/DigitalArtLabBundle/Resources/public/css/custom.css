@@ -127,13 +127,38 @@ ul.base-menu li a.active{
     color: #222;
 }
 
-ul.base-menu li a:hover{
+ul.base-menu li:hover{
     background: #333;
 }
 
 ul.base-menu li a.active:hover{
     background: #ffeb00;
 }
+
+li.hasdrop{
+    position: relative;
+}
+
+li.hasdrop ul.dropdown{
+    display:none;
+    position: absolute;
+    background: #222;
+    border: 1px solid #000;
+    z-index: 999999;
+    width: 100%;
+}
+
+li.hasdrop ul.dropdown li{
+    float: none;
+    border: 1px solid #000;
+    font-size:80%;
+}
+
+li.hasdrop:hover ul.dropdown{
+    display: block;
+}
+
+
 
 /*========================= header ==*/
 
