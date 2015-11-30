@@ -1,8 +1,10 @@
 {% trans_default_domain 'FOSUserBundle' %}
-
-<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
-    </div>
-</form>
+<div class="register-container">
+    <h2 class="h2">Profiel bewerken</h2>
+    <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+        {{ form_widget(form) }}
+        <div class="btn-fill">
+            <input type="submit" value="Opslaan" class="button" /><a href="{{ path('fos_user_profile_show') }}">Terug naar profielpagina</a>
+        </div>
+    </form>
+</div>
