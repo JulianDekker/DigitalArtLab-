@@ -3,7 +3,13 @@
     <h2 class="h2">Registreren bij het lab</h2>
 
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.username) }}
+    {{ form_row(form.plainPassword) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.firstname) }}
+    {{ form_row(form.lastname) }}
+    <div class="checkbox-row">{{ form_widget(form.nieuwsbrief, {'attr': {'class': 'checkbox'}}) }}<p>Ja, Ik wil me graag aanmelden voor de nieuwsbrief.</p></div>
+    {{ form_rest(form) }}
     <div class="btn-fill">
         <input type="submit" value="Registreren" class="button" /> <a href="{{ path('fos_user_security_login') }}">Ik heb al een account.</a>
     </div>

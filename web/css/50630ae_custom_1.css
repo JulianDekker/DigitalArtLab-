@@ -29,7 +29,7 @@ a{
 }
 
 /*========================= forms ==*/
-.label100, .group-100{
+.label100, .group-100, .checkbox-row{
     width: 100%;
     padding: 8px 5px 0px 0;
     box-sizing: border-box;
@@ -78,12 +78,23 @@ textarea.input100{
     padding-bottom: 5px;
 }
 
-.row{
+.row, .checkbox-row{
     width: 100%;
     border-bottom:1px solid #ccc;
     float: left;
     padding-bottom: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.checkbox-row p{
+    margin-left: 10px;
+    float: left;
+}
+
+.checkbox-row .checkbox{
+    float: left;
+    height: 22px;
+    width: auto;
 }
 
 /*========================= Menu ==*/

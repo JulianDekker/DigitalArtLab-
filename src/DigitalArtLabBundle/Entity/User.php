@@ -88,6 +88,28 @@ class User extends BaseUser
 
     protected $checkinurl;
 
+    /**
+     * @ORM\Column(type="boolean", length=1, nullable=true)
+     */
+
+    protected $nieuwsbrief;
+
+    /**
+     * @return mixed
+     */
+    public function getNieuwsbrief()
+    {
+        return $this->nieuwsbrief;
+    }
+
+    /**
+     * @param mixed $nieuwsbrief
+     */
+    public function setNieuwsbrief($nieuwsbrief)
+    {
+        $this->nieuwsbrief = $nieuwsbrief;
+    }
+
 
 
     /**
