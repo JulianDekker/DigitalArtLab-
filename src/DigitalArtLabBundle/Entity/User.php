@@ -195,7 +195,7 @@ class User extends BaseUser
      */
     public function setExpertises($expertises)
     {
-        $this->expertises = $expertises;
+        $this->expertises = nl2br($expertises);
 
         return $this;
     }
@@ -207,7 +207,7 @@ class User extends BaseUser
      */
     public function getExpertises()
     {
-        return $this->expertises;
+        return nl2br($this->expertises);
     }
 
     /**
@@ -231,7 +231,7 @@ class User extends BaseUser
      */
     public function getInteresses()
     {
-        return $this->interesses;
+        return nl2br($this->interesses);
     }
 
     /**

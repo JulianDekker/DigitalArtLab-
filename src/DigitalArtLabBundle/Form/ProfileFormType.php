@@ -30,7 +30,7 @@ class ProfileFormType extends AbstractType
             ->add('email', 'email', array('label' => 'Email', 'attr' => array('class'=>'input100'), 'label_attr' => array('class' => 'label100') ))
             ->add('address', null, array('label' => 'Address', 'attr' => array('class'=>'input100'), 'label_attr' => array('class' => 'label100') ))
             ->add('zipcode', null, array('label' => 'Postcode', 'attr' => array('class'=>'input100'), 'label_attr' => array('class' => 'label100') ))
-            ->add('interesses', 'textarea', array('label' => 'Expertises','required' => false, 'empty_data' => false, 'attr' => array('class'=>'input100'), 'label_attr' => array('class' => 'label100') ))
+            ->add('interesses', 'textarea', array('label' => 'Interesses','required' => false, 'empty_data' => false, 'attr' => array('class'=>'input100'), 'label_attr' => array('class' => 'label100') ))
             ->add('Expertises', 'textarea', array('label' => 'Expertises','required' => false, 'empty_data' => false, 'attr' => array('class'=>'input100'), 'label_attr' => array('class' => 'label100') ))
         ;
     }
