@@ -14,6 +14,11 @@ services:
         tags:
             - { name: form.type, alias: app_user_registration }
 
+    app.form.profile:
+            class: DigitalArtLabBundle\Form\ProfileFormType
+            tags:
+                - { name: form.type, alias: profileform }
+
     DigitalArtLabBundle.registration_listener:
             class: DigitalArtLabBundle\Eventlistener\RegistrationListener
             tags:

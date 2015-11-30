@@ -12,6 +12,11 @@ use DigitalArtLabBundle\Entity\checkin;
 use DigitalArtLabBundle\Form\checkinType;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\DateTime;
+use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\Model\UserInterface;
 
 /**
  * checkin controller.
@@ -36,6 +41,37 @@ class checkinController extends Controller
         ));
 
     }
+
+    /**
+     * @Route("/profile/{username}/edit")
+     * @Template()
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function editUserProfileAction(request $request, $username){
+
+        $em = $this->get('doctrine')->getManager();
+        $user = $em->getRepository('DigitalArtLabBundle:User')->findOneByUsername($username);
+
+        $form = $this->createFormBuilder($user)
+            ->add('email' , 'email')
+            ->add('firstname', 'firstname')
+            ->add('save', 'submit', array('label' => 'Create Task'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            // ... perform some action, such as saving the task to the database
+
+            return $this->redirectToRoute('task_success');
+        }
+
+        return $this->render('FOSUserBundle:Profile:edit.html.twig', array(
+            'form' => $form->createView(),
+        ));
+
+    }
+
 
     /**
      * @Route("/profile/{username}/checkin", name="checkin")

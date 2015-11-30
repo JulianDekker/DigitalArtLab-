@@ -12,7 +12,7 @@ class RegistrationType extends AbstractType
     {
         $builder->add('firstname', null, array('label' => 'Voornaam', 'attr' => array('class'=>'input100'), 'label_attr' => array('class' => 'label100') ));
         $builder->add('lastname', null, array('label' => 'Achternaam', 'attr' => array('class'=>'input100'), 'label_attr' => array('class' => 'label100') ));
-        $builder->add('address', null, array('label' => 'Address', 'attr' => array('class'=>'input100'), 'label_attr' => array('class' => 'label100') ));
+        /*$builder->add('address', null, array('label' => 'Address', 'attr' => array('class'=>'input100'), 'label_attr' => array('class' => 'label100') ));
         $builder->add('zipcode', null, array('label' => 'Postcode', 'attr' => array('class'=>'input100'), 'label_attr' => array('class' => 'label100') ));
         $builder->add('Expertises', 'textarea', array('label' => 'Expertises','required' => false, 'empty_data' => false, 'attr' => array('class'=>'input100'), 'label_attr' => array('class' => 'label100') ));
         $builder->add('Interesses', 'textarea', array('label' => 'Interesses','required' => false, 'empty_data' => false, 'attr' => array('class'=>'input100'), 'label_attr' => array('class' => 'label100') ));
