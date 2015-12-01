@@ -1,0 +1,65 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>profile</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Voornaam</th>
+                <td>{{ entity.voornaam }}</td>
+            </tr>
+            <tr>
+                <th>Achternaam</th>
+                <td>{{ entity.achternaam }}</td>
+            </tr>
+            <tr>
+                <th>Geboortedatum</th>
+                <td>{{ entity.geboortedatum|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ entity.email }}</td>
+            </tr>
+            <tr>
+                <th>Expertises</th>
+                <td>{{ entity.expertises }}</td>
+            </tr>
+            <tr>
+                <th>Interesses</th>
+                <td>{{ entity.interesses }}</td>
+            </tr>
+            <tr>
+                <th>Aanwezig</th>
+                <td>{{ entity.aanwezig }}</td>
+            </tr>
+            <tr>
+                <th>Saldo</th>
+                <td>{{ entity.saldo }}</td>
+            </tr>
+            <tr>
+                <th>QR</th>
+                <td >{{ entity.checkinUrl }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('profile', {'id': entity.id, 'voornaam': entity.voornaam, 'achternaam': entity.achternaam}) }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('profile_edit', { 'id': entity.id, 'voornaam':entity.voornaam, 'achternaam':entity.achternaam }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
