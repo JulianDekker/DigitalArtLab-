@@ -7,7 +7,7 @@ $(document).ready(function(){
         var qrcode = $(this).attr('value')
         console.log(qrcode);
         $(this).qrcode({
-            "size": 75,
+            "size": 95,
             "color": "#3a3",
             "text": qrcode
         });

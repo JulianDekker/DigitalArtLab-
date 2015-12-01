@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic);
 
     * {
         margin: 0;
@@ -7,11 +8,12 @@
     }
 
     .print_card {
-        width: 252.5px;
-        height: 150px;
+        width: 297px;
+        height: 180px;
         background: url('../../web/bundles/digitalartlab/images/pattern.jpg') #222222;
         background-size: 100% auto ;
         page-break-after: always;
+        font-family: "open sans";
     }
     canvas{
         background: #fff;
@@ -25,13 +27,14 @@
         margin-top: 5px;
     }
     .user {
-        font-size: 10px;
+        font-size: 14px;
         float: left;
         color: #fff;
         margin-left: 10px;
         margin-top: 15px;
+        max-width: 142px;
     }
-    h1{font-size:12px}
+    h1{font-size:14px}
 
     .underline{
         width: 100%;
@@ -41,11 +44,11 @@
     .url, .date{
         color: #fff;
         width: 50%;
-        margin-top: 20px;
+        margin-top: 25px;
         float: left;
         padding-left: 10px;
         box-sizing: border-box;
-        font-size: 8px;
+        font-size: 12px;
     }
 
     .date{
@@ -57,3 +60,7 @@
     .print_card.back{
         background: url('../../web/bundles/digitalartlab/images/print_back.jpg') #222222;
     }
+
+/*@page {
+    size: 297px 230px;
+}*/
