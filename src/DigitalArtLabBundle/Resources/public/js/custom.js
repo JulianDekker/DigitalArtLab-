@@ -4,8 +4,8 @@
 $(document).ready(function(){
 
     $('.qrcode').each(function() {
-        var qrcode = $(this).val();
-        console.log(qrcode)
+        var qrcode = $(this).attr('value')
+        console.log(qrcode);
         $(this).qrcode({
             "size": 75,
             "color": "#3a3",
