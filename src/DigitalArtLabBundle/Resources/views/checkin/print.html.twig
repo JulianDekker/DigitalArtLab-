@@ -2,7 +2,7 @@
     {% stylesheets filter="cssrewrite"
     '@DigitalArtLabBundle/Resources/public/css/print.css'
     %}
-    <link rel="stylesheet" href="{{ asset_url }}"  />
+    <link rel="stylesheet" href="{{ asset_url }}"  media="print"/>
     {% endstylesheets %}
 {% endblock %}
 <body>
@@ -14,8 +14,9 @@
             {{ user.username }}
             <h1 class="undertitle">Volledige naam:</h1>
             <hr>
-            {{ user.firstname }} {{ user.lastname }}</div>
-        <p class="url">www.digitalartlab.nl</p><p class="date">{{ "now"|date('d-m-Y') }}</p>
+            {{ user.firstname }} {{ user.lastname }}
+        </div>
+        <div class="underline"><p class="url">www.digitalartlab.nl</p><p class="date">Datum: {{ "now"|date('d-m-Y') }}</p></div>
     </div>
     {% block javascripts %}
         {% javascripts

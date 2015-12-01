@@ -31,11 +31,24 @@
         margin-top: 15px;
     }
     h1{font-size:12px}
-    .url{
-        color: #fff;
+
+    .underline{
         width: 100%;
+        float: left;
+    }
+
+    .url, .date{
+        color: #fff;
+        width: 50%;
         margin-top: 20px;
         float: left;
-        margin-left: 10px;
+        padding-left: 10px;
+        box-sizing: border-box;
         font-size: 8px;
+    }
+
+    .date{
+        float: right;
+        padding-right: 20px;
+        text-align: right;
     }
