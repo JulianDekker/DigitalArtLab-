@@ -1,0 +1,41 @@
+
+    * {
+        margin: 0;
+        padding: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .print_card {
+        width: 252.5px;
+        height: 150px;
+        background: url('../../web/bundles/digitalartlab/images/pattern.jpg') #222222;
+        background-size: 100% auto ;
+    }
+    canvas{
+        background: #fff;
+        padding: 5px;
+    }
+    .qrcode{
+        padding: 10px;
+        float: left;
+    }
+    h1.undertitle{
+        margin-top: 5px;
+    }
+    .user {
+        font-size: 10px;
+        float: left;
+        color: #fff;
+        margin-left: 10px;
+        margin-top: 15px;
+    }
+    h1{font-size:12px}
+    .url{
+        color: #fff;
+        width: 100%;
+        margin-top: 20px;
+        float: left;
+        margin-left: 10px;
+        font-size: 8px;
+    }

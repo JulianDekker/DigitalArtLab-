@@ -1,0 +1,29 @@
+{% block stylesheets %}
+    {% stylesheets filter="cssrewrite"
+    '@DigitalArtLabBundle/Resources/public/css/print.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}"  />
+    {% endstylesheets %}
+{% endblock %}
+<body>
+    <div class="print_card">
+        <div class="qrcode" value="{{ user.checkinurl }}"></div>
+        <div class="user">
+            <h1>Gebruikersnaam:</h1>
+            <hr>
+            {{ user.username }}
+            <h1 class="undertitle">Volledige naam:</h1>
+            <hr>
+            {{ user.firstname }} {{ user.lastname }}</div>
+        <p class="url">www.digitalartlab.nl</p><p class="date">{{ "now"|date('d-m-Y') }}</p>
+    </div>
+    {% block javascripts %}
+        {% javascripts
+        '%kernel.root_dir%/../vendor/components/jquery/jquery.js'
+        '@DigitalArtLabBundle/Resources/public/js/jquery.qrcode.js'
+        '@DigitalArtLabBundle/Resources/public/js/custom.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+</body>

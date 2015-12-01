@@ -1,18 +1,20 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Gebruikersbeheer</h1>
+<div class="content-container">
+    <h2 class="h2">Gebruikersbeheer</h2>
     <table>
         <tr>
             <th>Gebruikersnaam</th>
             <th>Volledige naam</th>
+            <th>Saldo</th>
             <th>Aanwezig</th>
-            <th>actie</th>
         </tr>
         {% for users in users %}
             <tr class="user">
                 <td>{{ users.username }}</td>
                 <td>{{ users.firstname }} {{ users.lastname }}</td>
+                <td>{{ users.saldo }}</td>
                 <td>
                 {% if users.aanwezig == 1 %}
                     In het lab
@@ -22,13 +24,19 @@
                     Niet aanwezig
                 {% endif %}
                 </td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td>
                     <a href="{{ path('checkin', {'username': users.username}) }}">
-                    {% if users.aanwezig == 1 %}
-                        Afmelden
-                    {% elseif users.aanwezig == 0 %}
-                        Aanmelden
-                     {% endif %}
+                        {% if users.aanwezig == 1 %}
+                            Afmelden
+                        {% elseif users.aanwezig == 0 %}
+                            Aanmelden
+                        {% endif %}
                     </a>
                 </td>
             </tr>
@@ -36,7 +44,7 @@
     </table>
     <a href="{{ path('fos_user_registration_register') }}">Gebruiker toevoegen</a>
     <a href="{{ path('admin') }}">Terug naar overzicht</a>
-
+</div>
 
 
 {% endblock %}

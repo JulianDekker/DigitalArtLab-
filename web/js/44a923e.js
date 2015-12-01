@@ -11957,7 +11957,7 @@ $(document).ready(function(){
         var qrcode = $(this).val();
         console.log(qrcode)
         $(this).qrcode({
-            "size": 100,
+            "size": 75,
             "color": "#3a3",
             "text": qrcode
         });

@@ -118,5 +118,21 @@ class checkinController extends Controller
 
     }
 
+    /**
+     * @Route("/profile/{username}/print", name="print_user")
+     * @Template()
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function printCardAction($username){
+
+        $em = $this->get('doctrine')->getManager();
+        $user = $em->getRepository('DigitalArtLabBundle:User')->findOneByUsername($username);
+
+        return $this->render('DigitalArtLabBundle:checkin:print.html.twig', array(
+            'user' => $user
+        ));
+
+    }
+
 
 }
