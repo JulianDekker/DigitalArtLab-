@@ -29,7 +29,7 @@
             <tr>
                 <td></td>
                 <td></td>
-                <td></td>
+                <td><a href="#" onclick="appendFrame( '{{ users.username }}', {{ loop.index }} ); frames['frame{{ loop.index }}'].print();" >Print pas</a></td>
                 <td>
                     <a href="{{ path('checkin', {'username': users.username}) }}">
                         {% if users.aanwezig == 1 %}
@@ -39,6 +39,7 @@
                         {% endif %}
                     </a>
                 </td>
+
             </tr>
         {% endfor %}
     </table>

@@ -11,6 +11,7 @@
         height: 150px;
         background: url('../../web/bundles/digitalartlab/images/pattern.jpg') #222222;
         background-size: 100% auto ;
+        page-break-after: always;
     }
     canvas{
         background: #fff;
@@ -51,4 +52,8 @@
         float: right;
         padding-right: 20px;
         text-align: right;
+    }
+
+    .print_card.back{
+        background: url('../../web/bundles/digitalartlab/images/print_back.jpg') #222222;
     }
