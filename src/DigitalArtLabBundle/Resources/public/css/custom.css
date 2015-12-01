@@ -28,6 +28,10 @@ a{
     color: #2699D6;
 }
 
+hr{
+    margin: 10px 0;
+}
+
 /*========================= forms ==*/
 .label100, .group-100, .checkbox-row{
     width: 100%;
@@ -261,10 +265,36 @@ li.hasdrop:hover ul.dropdown{
     text-decoration: none;
 }
 
-/*================ profile */
+/*================ admin */
+.infoblocks-container{
+    width: 75%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    float: left;
+}
 
+.infoblock{
+    width: 31%;
+    padding: 20px 0 20px 0px;
+    box-sizing: border-box;
+    border: 1px solid #222222;
+    float: left;
+    margin-right: 3.5%;
+    text-align: center;
+}
 
+.infoblock:last-child {
+    margin-right: 0px;
+}
 
+.userlist li{
+    list-style-type: none;
+}
+.userlist li a{
+    padding: 2px 0;
+    float: left;
+    width: 100%;
+}
 
 
 

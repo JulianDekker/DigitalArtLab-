@@ -25,7 +25,7 @@ use FOS\UserBundle\Model\UserInterface;
 class checkinController extends Controller
 {
     /**
-     * @Route("/profile/{username}")
+     * @Route("/profile/{username}", name="userprofile")
      * @Template()
      * @Security("has_role('ROLE_USER')")
      */

@@ -1,7 +1,9 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+<div class="content-container">
     <div class="infoblocks-container">
+       <h2 class="h2">Administratie</h2>
         <div class="infoblock">
             <a href="{{ path('admin_usermanager') }}">Gebruikersbeheer</a>
         </div>
@@ -12,13 +14,17 @@
             <a href="">statestieken</a>
         </div>
     </div>
-    <div class="side-container">
+    <div class="side-content">
+        <h2 class="h2">Info</h2>
         <div class="peoplenline">
-            <p>{{ aanwezig|length }}</p>
-            <p>aanwezig</p>
+            <h3>{{ aanwezig|length }} Gebruikers aanwezig</h3>
+            <hr>
+            <ul class="userlist">
+            {% for user in aanwezig %}
+                <li><a href="{{ path('userprofile', {'username': user.username}) }}" target="_blank">{{ user.firstname }} {{ user.lastname }}</a></li>
+            {% endfor %}
+            </ul>
         </div>
     </div>
-
-
-
+</div>
 {% endblock %}
