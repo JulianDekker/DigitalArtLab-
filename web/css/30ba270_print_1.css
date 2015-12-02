@@ -1,4 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic);
+/*@page {
+    margin: 0;
+    size: 320px 200px;
+}*/
 
     * {
         margin: 0;
@@ -8,12 +12,16 @@
     }
 
     .print_card {
-        width: 297px;
+        width: 298px;
         height: 180px;
         background: url('../../web/bundles/digitalartlab/images/pattern.jpg') #222222;
         background-size: 100% auto ;
-        page-break-after: always;
         font-family: "open sans";
+        /*position: relative;
+        top: 50%;
+        left: 50%;
+        margin: -149px 0 0 -140px;
+        page-break-after: always;*/
     }
     canvas{
         background: #fff;
@@ -59,8 +67,9 @@
 
     .print_card.back{
         background: url('../../web/bundles/digitalartlab/images/print_back.jpg') #222222;
+        /*margin: -201px 0 0 -149px;*/
     }
 
-/*@page {
-    size: 297px 230px;
-}*/
+    table{
+        width: 100%;
+    }
