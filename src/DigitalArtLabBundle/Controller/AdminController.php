@@ -4,10 +4,13 @@ namespace DigitalArtLabBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use DigitalartlabBundle\Entity\transaction;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use  Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -45,8 +48,26 @@ class AdminController extends Controller
 
 
         return $this->render('DigitalArtLabBundle:Admin:usermanager.html.twig', array(
-            'users' => $users
+            'users' => $users,
         ));
+    }
+
+    public function generateFormsAction($username){
+        $adminname = $this->container->get('security.context')->getToken()->getUser();
+
+        $transaction = new transaction();
+        $transaction->setAdminName($adminname);
+
+        $form = $this->createFormBuilder($transaction)
+            ->add('username', null)
+            ->add('amount', null)
+            ->add('submit', 'submit')
+            ->getForm();
+
+        return $this->render('admin/transaction.html.twig', array(
+            'form' => $form->createView(),
+        ));
+
     }
 
 

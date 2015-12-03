@@ -22,6 +22,12 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="transaction", mappedBy="User")
+     */
+    private $tranasaction;
 
     /**
      * @Assert\NotBlank(message="Please enter your name.", groups={"Registration", "Profile"})

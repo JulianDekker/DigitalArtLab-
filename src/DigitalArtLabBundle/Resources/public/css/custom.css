@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic);
+
 *{
     margin: 0;
     padding: 0;
@@ -12,6 +14,10 @@ body{
 }
 
 /*========================= Fonts ==*/
+body{
+    font-family: "open sans";
+}
+
 h2.h2{
     font-size: 36px;
     text-transform:  uppercase;
@@ -101,6 +107,20 @@ textarea.input100{
     width: auto;
 }
 
+table{
+    text-align: left;
+    border-spacing: 0;
+}
+
+tr.th{
+    background: #67B7CA;
+}
+
+tr.th th{
+    padding: 5px;
+    color: #fff;
+}
+
 /*========================= Menu ==*/
 .menu{
     width: 100%;
@@ -158,7 +178,6 @@ li.hasdrop ul.dropdown{
     display:none;
     position: absolute;
     background: #222;
-    border: 1px solid #000;
     z-index: 999999;
     width: 100%;
 }
@@ -296,7 +315,21 @@ li.hasdrop:hover ul.dropdown{
     width: 100%;
 }
 
+/*================ Usermanager */
 
+table.usermanager{
+    width: 100%;
+}
+
+tr.user td{
+    padding:5px;
+}
+
+tr.actions-row td{
+    padding: 5px;
+    border-bottom: 1px solid #9A9999;
+    background: #efefef;
+}
 
 
 

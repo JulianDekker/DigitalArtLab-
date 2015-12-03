@@ -3,8 +3,8 @@
 {% block body -%}
 <div class="content-container">
     <h2 class="h2">Gebruikersbeheer</h2>
-    <table>
-        <tr>
+    <table class="usermanager">
+        <tr class="th">
             <th>Gebruikersnaam</th>
             <th>Volledige naam</th>
             <th>Saldo</th>
@@ -26,10 +26,10 @@
                 </td>
 
             </tr>
-            <tr>
-                <td></td>
-                <td></td>
+            <tr class="actions-row">
+                <td><a href="{{ path('userprofile', {'username': users.username}) }}" target="_blank">Bekijk profiel</a></td>
                 <td><a href="#" onclick="appendFrame( '{{ users.username }}', {{ loop.index }} ); frames['frame{{ loop.index }}'].print();" >Print pas</a></td>
+                <td><a href="#">Saldo wijzigen</a></td>
                 <td>
                     <a href="{{ path('checkin', {'username': users.username}) }}">
                         {% if users.aanwezig == 1 %}
@@ -39,7 +39,11 @@
                         {% endif %}
                     </a>
                 </td>
-
+            </tr>
+            <tr>
+                <td colspan="4">
+                    {% render controller('DigitalArtLabBundle:Admin:generateForms', { 'username': users.username }) %}
+                </td>
             </tr>
         {% endfor %}
     </table>
