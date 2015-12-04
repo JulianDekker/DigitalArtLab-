@@ -29,6 +29,7 @@ class RegistrationListener implements EventSubscriberInterface
         $username = $user->getUserName();
         $checkInUrl = 'http://localhost:1337/digitalartlab/web/profile/' . $username . '/checkin';
         $user->setCheckinurl($checkInUrl);
+        $user->setSaldo(0);
     }
 
 }

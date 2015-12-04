@@ -42,7 +42,10 @@
             </tr>
             <tr>
                 <td colspan="4">
-                    {% render controller('DigitalArtLabBundle:Admin:generateForms', { 'username': users.username }) %}
+            {#{{ form_start(arrayForms[loop.index0]) }}
+                    {{ form_row(arrayForms[loop.index0].username, { value: users.username }) }}
+                    {{ form_rest(arrayForms[loop.index0]) }}
+                    {{ form_end(arrayForms[loop.index0]) }}#}
                 </td>
             </tr>
         {% endfor %}

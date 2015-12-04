@@ -32,11 +32,20 @@ class transaction
     private $user;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=255)
+     * @return ArrayCollection
      */
-    private $username;
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param ArrayCollection $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
 
     /**
      * @var string
@@ -82,30 +91,6 @@ class transaction
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     *
-     * @return transaction
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->username;
     }
 
     /**
@@ -232,5 +217,6 @@ class transaction
     {
         $this->time = new \DateTime();
     }
+
 }
 

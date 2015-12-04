@@ -25,9 +25,25 @@ class User extends BaseUser
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="transaction", mappedBy="User")
+     * @ORM\OneToMany(targetEntity="transaction", mappedBy="user")
      */
-    private $tranasaction;
+    private $transaction;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getTransaction()
+    {
+        return $this->transaction;
+    }
+
+    /**
+     * @param ArrayCollection $transaction
+     */
+    public function setTransaction($transaction)
+    {
+        $this->transaction = $transaction;
+    }
 
     /**
      * @Assert\NotBlank(message="Please enter your name.", groups={"Registration", "Profile"})
@@ -338,7 +354,7 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+
     }
 
     /**
