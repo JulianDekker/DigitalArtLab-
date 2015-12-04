@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>transaction creation</h1>
+
+    {{ form_start(form) }}
+    Gebruikersnaam{{ form_widget(form.user) }}
+    {{ form_rest(form) }}
+
+    {{ form_end(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_transaction') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>transaction</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Adminname</th>
+                <td>{{ entity.adminName }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ entity.user.username }}</td>
+            </tr>
+            <tr>
+                <th>Time</th>
+                <td>{{ entity.time|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <td>{{ entity.amount }}</td>
+            </tr>
+            <tr>
+                <th>Oldbalance</th>
+                <td>{{ entity.oldbalance }}</td>
+            </tr>
+            <tr>
+                <th>Newbalance</th>
+                <td>{{ entity.newbalance }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_transaction') }}">
+            Back to the list
+        </a>
+    </li>
+
+</ul>
+{% endblock %}

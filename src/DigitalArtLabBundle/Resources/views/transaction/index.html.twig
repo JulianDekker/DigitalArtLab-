@@ -1,0 +1,57 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+
+    {% if app.request.get('status') is defined %}
+        {% set status = app.request.get('status') %}
+        {% set id = app.request.get('id') %}
+        {% if status == 'Succes' %}
+            <p class="succesmessage">Transactie #{{ id }} succesvol!</p>
+        {% elseif status == 'Fail' %}
+            <p class="failmessage">Transactie is mislukt, gebruiker heeft te weinig saldo.</p>
+        {% endif %}
+    {% endif %}
+    <h1>transaction list</h1>
+    <ul>
+        <li>
+            <a href="{{ path('admin_transaction_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Gebruikersnaam</th>
+                <th>Door</th>
+                <th>Time</th>
+                <th>Amount</th>
+                <th>Oldbalance</th>
+                <th>Newbalance</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('admin_transaction_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.user.username }}</td>
+                <td>{{ entity.adminName }}</td>
+                <td>{% if entity.time %}{{ entity.time|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.amount }}</td>
+                <td>{{ entity.oldbalance }}</td>
+                <td>{{ entity.newbalance }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('admin_transaction_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}
