@@ -331,7 +331,9 @@ tr.actions-row td{
     background: #efefef;
 }
 
-
+.user_transaction_form{
+    display: none;
+}
 
 
 

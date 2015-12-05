@@ -11,10 +11,11 @@
             <th>Aanwezig</th>
         </tr>
         {% for users in users %}
+            <tbody class="tr-group">
             <tr class="user">
                 <td>{{ users.username }}</td>
                 <td>{{ users.firstname }} {{ users.lastname }}</td>
-                <td>{{ users.saldo }}</td>
+                <td id="{{ users.username }}">{{ users.saldo }}</td>
                 <td>
                 {% if users.aanwezig == 1 %}
                     In het lab
@@ -29,7 +30,7 @@
             <tr class="actions-row">
                 <td><a href="{{ path('userprofile', {'username': users.username}) }}" target="_blank">Bekijk profiel</a></td>
                 <td><a href="#" onclick="appendFrame( '{{ users.username }}', {{ loop.index }} ); frames['frame{{ loop.index }}'].print();" >Print pas</a></td>
-                <td><a href="#">Saldo wijzigen</a></td>
+                <td><a href="#" class="opensaldoform">Saldo wijzigen</a></td>
                 <td>
                     <a href="{{ path('checkin', {'username': users.username}) }}">
                         {% if users.aanwezig == 1 %}
@@ -42,17 +43,42 @@
             </tr>
             <tr>
                 <td colspan="4">
-            {#{{ form_start(arrayForms[loop.index0]) }}
-                    {{ form_row(arrayForms[loop.index0].username, { value: users.username }) }}
-                    {{ form_rest(arrayForms[loop.index0]) }}
-                    {{ form_end(arrayForms[loop.index0]) }}#}
+                    <form class="user_transaction_form">
+                        Gebruikersnaam: <input type="text" value="{{ users.username }}" disabled="disabled" />
+                        Bij/afschrijven: <input type="number">
+                        <input type="submit" value="New transaction" class="transactionbutton">
+                    </form>
                 </td>
             </tr>
+            </tbody>
         {% endfor %}
     </table>
     <a href="{{ path('fos_user_registration_register') }}">Gebruiker toevoegen</a>
     <a href="{{ path('admin') }}">Terug naar overzicht</a>
 </div>
+<script>
 
+    $(document).ready(function(){
+        $('.transactionbutton').on('click', function(event){
+            event.preventDefault();
+            var user = $(this).parent().find('input[type="text"]').val();
+            var amount = $(this).parent().find('input[type="number"]').val();
+            acreateTransaction(user,amount,parent);
+        });
+
+    });
+
+    function acreateTransaction(user, amount){
+        console.log(user, amount);
+        $.post(
+            '{{path('DigitalArtLabBundle_ajax_create_transaction')}}',
+            {userdata: user, amountdata: amount},
+            function(response){
+                if(response.code == 100 && response.success){//dummy check
+                    $('#'+user).text(response.newsaldo)
+                }
+            }, "json");
+    }
+</script>
 
 {% endblock %}

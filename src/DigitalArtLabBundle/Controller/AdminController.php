@@ -3,6 +3,7 @@
 namespace DigitalArtLabBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use DigitalartlabBundle\Entity\transaction;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -39,7 +40,7 @@ class AdminController extends Controller
      * @Template()
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function adminUsermanagerAction()
+    public function adminUsermanagerAction(Request $request)
     {
         $em = $this->get('doctrine')->getManager();
         $users = $em->getRepository('DigitalArtLabBundle:User')->findAllOrderedByAanwezig();
@@ -50,6 +51,7 @@ class AdminController extends Controller
             $arrayForms[] = $show;
         }*/
 
+
         /*var_dump($users);*/
         return $this->render('DigitalArtLabBundle:Admin:usermanager.html.twig', array(
             'users' => $users,
@@ -57,39 +59,42 @@ class AdminController extends Controller
         ));
     }
 
-    /*public function saveAction(Request $request)
-    {
-        if ($request->isXMLHttpRequest()) {
-            $data = $request->request->get('request');
-            $itemName = // Extract it from $data variable
-            $adminname = $this->container->get('security.context')->getToken()->getUser();
+    public function createTransactionAction(request $request){
+        $em = $this->getDoctrine()->getManager();
 
-            $transaction = new transaction();
-            $transaction->setAdminName($adminname);
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($transaction);
-            $em->flush();
-        } else {
-            // Do something else
-        }
-    }
-
-    private function formShow()
-    {
-        $adminname = $this->container->get('security.context')->getToken()->getUser();
+        $amountdata = $request->request->get('amountdata');
+        $userdata = $request->request->get('userdata');
+        $user = $em->getRepository('DigitalArtLabBundle:User')->findOneByUsername($userdata);
 
         $transaction = new transaction();
-        $transaction->setAdminName($adminname);
 
-        $show = $this->createFormBuilder($transaction)
-            ->setMethod('POST')
-            ->add('username', null, array('label' => 'Gebruikersnaam', 'attr' => array('disabled' => 'disabled') ))
-            ->add('user', null, array('label' => 'Gebruikersnaam') )
-            ->add('amount', null)
-            ->add('submit', 'submit')
-            ->getForm();
+        $transaction->setAdminName($this->container->get('security.context')->getToken()->getUser());
+        $transaction->setTime(new \DateTime());
+        $transaction->setamount($amountdata);
+        $transaction->setUser($user);
 
-        return $show;
-    }*/
+
+        $oldbalance = $user->getSaldo();
+        $newbalance = $oldbalance + $amountdata;
+
+        if ($newbalance > 0){
+            $user->setSaldo($newbalance);
+            $transaction->setOldbalance($oldbalance);
+            $transaction->setNewbalance($newbalance);
+
+            $em->persist($transaction);
+            $em->flush();
+
+            $status = 'Succes';
+        }
+        else{
+            $status = 'Fail';
+        }
+
+            //prepare the response, e.g.
+        $response = array("code" => 100, "success" => true, "newsaldo" => $newbalance);
+        //you can return result as JSON
+        return new Response(json_encode($response));
+    }
+
 }

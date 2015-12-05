@@ -26,3 +26,7 @@ digital_art_lab:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+DigitalArtLabBundle_ajax_create_transaction:
+  pattern:  /create/new/transaction/ajax/call
+  defaults: { _controller: DigitalArtLabBundle:Admin:createTransaction }
