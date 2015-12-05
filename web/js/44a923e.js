@@ -11968,6 +11968,12 @@ $(document).ready(function(){
     var containerheight = viewheight - 141 - 150;
     $('.container.body').css({"min-height" : containerheight+"px" });
 
+    $('.tr-group .opensaldoform').on("click", function(e){
+        e.preventDefault();
+        $(this).parent().parent().parent().find('.user_transaction_form').slideToggle();
+        console.log(this)
+    })
+
 });
 
 function appendFrame(username, index){
@@ -11980,3 +11986,4 @@ function appendFrame(username, index){
     }
 
 }
+

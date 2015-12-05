@@ -121,6 +121,20 @@ tr.th th{
     color: #fff;
 }
 
+.error,.succes{
+    background: #550903;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.succes{
+    background: #66dd66;
+}
 /*========================= Menu ==*/
 .menu{
     width: 100%;
@@ -323,6 +337,7 @@ table.usermanager{
 
 tr.user td{
     padding:5px;
+    border-top: 1px solid #9A9999;
 }
 
 tr.actions-row td{
@@ -331,7 +346,9 @@ tr.actions-row td{
     background: #efefef;
 }
 
-
+.user_transaction_form{
+    display: none;
+}
 
 
 
