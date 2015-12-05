@@ -85,14 +85,12 @@ class AdminController extends Controller
             $em->persist($transaction);
             $em->flush();
 
-            $status = 'Succes';
+            $response = array("code" => 100, "success" => true, "newsaldo" => $newbalance);
         }
         else{
-            $status = 'Fail';
+            $response = array("code" => 200, "success" => false,);
         }
 
-            //prepare the response, e.g.
-        $response = array("code" => 100, "success" => true, "newsaldo" => $newbalance);
         //you can return result as JSON
         return new Response(json_encode($response));
     }

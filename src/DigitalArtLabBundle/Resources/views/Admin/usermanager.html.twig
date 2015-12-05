@@ -3,6 +3,7 @@
 {% block body -%}
 <div class="content-container">
     <h2 class="h2">Gebruikersbeheer</h2>
+    <div id="response-message"></div>
     <table class="usermanager">
         <tr class="th">
             <th>Gebruikersnaam</th>
@@ -12,6 +13,9 @@
         </tr>
         {% for users in users %}
             <tbody class="tr-group">
+            <tr class="user">
+                <td colspan="4"></td>
+            </tr>
             <tr class="user">
                 <td>{{ users.username }}</td>
                 <td>{{ users.firstname }} {{ users.lastname }}</td>
@@ -63,19 +67,34 @@
             event.preventDefault();
             var user = $(this).parent().find('input[type="text"]').val();
             var amount = $(this).parent().find('input[type="number"]').val();
+            var parent = $(this).parent().parent().parent();
             acreateTransaction(user,amount,parent);
         });
 
     });
 
-    function acreateTransaction(user, amount){
+    function acreateTransaction(user, amount, parent){
         console.log(user, amount);
         $.post(
             '{{path('DigitalArtLabBundle_ajax_create_transaction')}}',
             {userdata: user, amountdata: amount},
             function(response){
                 if(response.code == 100 && response.success){//dummy check
-                    $('#'+user).text(response.newsaldo)
+                    var count = $('#'+user).text();
+                    $('#'+user).prop('Counter',count).animate({
+                        Counter: response.newsaldo
+                    }, {
+                        duration: 500,
+                        easing: 'swing',
+                        step: function (now) {
+                            $(this).text(Math.ceil(now));
+                        }
+                    });
+                    $(parent).find('.user_transaction_form').slideToggle().find('input[type="number"]').val(null);
+                    $('#response-message').addClass('succes').removeClass('error').text('Transactie geslaagd! saldo van '+ user+ ' aangepast .' );
+                }
+                if(response.code == 200 || response.success == false){
+                    $('#response-message').addClass('error').removeClass('succes').text('Transactie mislukt, gebruiker '+ user + ' Heeft niet genoeg saldo.');
                 }
             }, "json");
     }
