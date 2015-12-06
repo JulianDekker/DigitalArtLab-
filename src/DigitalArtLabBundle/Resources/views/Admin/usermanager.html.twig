@@ -2,8 +2,11 @@
 
 {% block body -%}
 <div class="content-container">
-    <h2 class="h2">Gebruikersbeheer</h2>
-    <div id="response-message"></div>
+
+    <h2 class="h2">Gebruikersbeheer</h2><div id="response-message"></div>
+    <a href="{{ path('fos_user_registration_register') }}">Gebruiker toevoegen</a>
+    <a href="{{ path('admin') }}">Terug naar overzicht</a>
+
     <table class="usermanager">
         <tr class="th">
             <th>Gebruikersnaam</th>
@@ -48,17 +51,15 @@
             <tr>
                 <td colspan="4">
                     <form class="user_transaction_form">
-                        Gebruikersnaam: <input type="text" value="{{ users.username }}" disabled="disabled" />
-                        Bij/afschrijven: <input type="number">
-                        <input type="submit" value="New transaction" class="transactionbutton">
+                        <label>Gebruikersnaam: </label><input type="text" value="{{ users.username }}" disabled="disabled" />
+                        <label>Hoeveelheid: </label><input type="number">
+                        <input type="submit" value="Bij/Afschrijven" class="transactionbutton">
                     </form>
                 </td>
             </tr>
             </tbody>
         {% endfor %}
     </table>
-    <a href="{{ path('fos_user_registration_register') }}">Gebruiker toevoegen</a>
-    <a href="{{ path('admin') }}">Terug naar overzicht</a>
 </div>
 <script>
 

@@ -77,7 +77,7 @@ class AdminController extends Controller
         $oldbalance = $user->getSaldo();
         $newbalance = $oldbalance + $amountdata;
 
-        if ($newbalance > 0){
+        if ($newbalance >= 0){
             $user->setSaldo($newbalance);
             $transaction->setOldbalance($oldbalance);
             $transaction->setNewbalance($newbalance);
