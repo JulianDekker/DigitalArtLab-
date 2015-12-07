@@ -119,6 +119,21 @@ class checkinController extends Controller
     }
 
     /**
+     * @Route("/admin/sessions", name="admin_checkin")
+     * @Template()
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function checkinHistoryAction(){
+        $em = $this->get('doctrine')->getManager();
+        $checkin = $em->getRepository('DigitalArtLabBundle:checkin')->findBy([],['timein' => 'DESC']);
+
+        return $this->render('DigitalArtLabBundle:checkin:history.html.twig', array(
+            'checkin' => $checkin
+        ));
+    }
+
+
+    /**
      * @Route("/profile/{username}/print", name="print_user")
      * @Template()
      * @Security("has_role('ROLE_ADMIN')")

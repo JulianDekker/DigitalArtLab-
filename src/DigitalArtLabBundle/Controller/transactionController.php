@@ -31,7 +31,7 @@ class transactionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('DigitalArtLabBundle:transaction')->findAll();
+        $entities = $em->getRepository('DigitalArtLabBundle:transaction')->findBy([], ['time' => 'DESC']);
 
 
         return array(
@@ -132,29 +132,6 @@ class transactionController extends Controller
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        );
-    }
-
-    /**
-     * Finds and displays a transaction entity.
-     *
-     * @Route("/{id}", name="admin_transaction_show")
-     * @Method("GET")
-     * @Template()
-     * @Security("has_role('ROLE_ADMIN')")
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('DigitalArtLabBundle:transaction')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find transaction entity.');
-        }
-
-        return array(
-            'entity'      => $entity
         );
     }
 

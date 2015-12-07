@@ -135,6 +135,10 @@ tr.th th{
 .succes{
     background: #66dd66;
 }
+
+ul li{
+    list-style-type: none;
+}
 /*========================= Menu ==*/
 .menu{
     width: 100%;
@@ -243,6 +247,7 @@ li.hasdrop:hover ul.dropdown{
     width: 100%;
     padding: 0 45px 0 45px;
     box-sizing: border-box;
+    padding-bottom: 30px;
 }
 
 .main-content{
@@ -257,6 +262,7 @@ li.hasdrop:hover ul.dropdown{
     float: left;
     box-sizing: border-box;
 }
+
 
 
 /*========================responsive base */
@@ -346,6 +352,10 @@ tr.actions-row td{
     background: #efefef;
 }
 
+.infoblock:nth-child(4){
+    margin-right: 0;
+}
+
 .user_transaction_form{
     display: none;
     padding: 5px;
@@ -367,9 +377,16 @@ tr.actions-row td{
     padding: 2px 15px;
 }
 
+/*=====================Transacties =========*/
 
+.usermanager.transaction tr:not(.th):nth-child(odd){
+    background: #efefef;
+}
 
+.usermanager.transaction td{
+    padding: 5px;
 
+}
 
 
 

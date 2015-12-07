@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-
+<div class="content-container">
     {% if app.request.get('status') is defined %}
         {% set status = app.request.get('status') %}
         {% set id = app.request.get('id') %}
@@ -11,45 +11,37 @@
             <p class="failmessage">Transactie is mislukt, gebruiker heeft te weinig saldo.</p>
         {% endif %}
     {% endif %}
-    <h1>transaction list</h1>
+    <h2 class="h2">Transactie geschiedenis</h2>
     <ul>
         <li>
-            <a href="{{ path('admin_transaction_new') }}">Create a new entry</a><a href="{{ path('admin') }}">Terug naar dashboard</a>
+            <a href="{{ path('admin_transaction_new') }}">Nieuwe transactie</a><a href="{{ path('admin') }}">Terug naar dashboard</a>
         </li>
     </ul>
-    <table class="records_list">
+    <table class="usermanager transaction">
         <thead>
-            <tr>
+            <tr class="th">
                 <th>Id</th>
                 <th>Gebruikersnaam</th>
                 <th>Door</th>
-                <th>Time</th>
-                <th>Amount</th>
-                <th>Oldbalance</th>
-                <th>Newbalance</th>
-                <th>Actions</th>
+                <th>Tijd</th>
+                <th>Oud saldo</th>
+                <th>Nieuw saldo</th>
+                <th>Verandering</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('admin_transaction_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.user.username }}</td>
+                <td>{{ entity.id }}</td>
+                <td><a href="{{ path('userprofile', {'username': entity.user.username}) }}" target="_blank">{{ entity.user.username }}</a></td>
                 <td>{{ entity.adminName }}</td>
                 <td>{% if entity.time %}{{ entity.time|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.amount }}</td>
                 <td>{{ entity.oldbalance }}</td>
                 <td>{{ entity.newbalance }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('admin_transaction_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                </ul>
-                </td>
+                <td>{{ entity.amount }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
+</div>
     {% endblock %}
