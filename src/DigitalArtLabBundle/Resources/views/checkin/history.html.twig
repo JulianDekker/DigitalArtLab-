@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+
+    <div class="content-container">
+        <h2 class="h2">Sessie geschiedenis</h2>
+        <ul>
+            <li>
+                <a href="{{ path('admin') }}">Terug naar dashboard</a>
+            </li>
+        </ul>
+        <table class="usermanager transaction">
+            <thead>
+            <tr class="th">
+                <th>Id</th>
+                <th>Gebruikersnaam</th>
+                <th>Tijd in</th>
+                <th>Tijd uit</th>
+                <th>Sessie duur</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for checkins in checkin %}
+                <tr>
+                    {% if checkins.timeout is null or empty %}{% else %}
+                        <td>{{ checkins.id }}</td>
+                        <td><a href="{{ path('userprofile', {'username': checkins.username}) }}" target="_blank">{{ checkins.username }}</a></td>
+                        <td>{{ checkins.timein|date('d-m-Y H:i:s') }}</td>
+                        <td>{{ checkins.timeout|date('d-m-Y H:i:s') }}</td>
+                        <td>{{ checkins.sessionduration|date('H:i:s') }}</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
