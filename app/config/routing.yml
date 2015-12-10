@@ -23,9 +23,9 @@ digital_art_lab:
     type:     annotation
     prefix:   /
 
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
+#app:
+#    resource: "@AppBundle/Controller/"
+#    type:     annotation
 
 DigitalArtLabBundle_ajax_create_transaction:
   pattern:  /create/new/transaction/ajax/call
