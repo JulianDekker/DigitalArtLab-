@@ -47,11 +47,46 @@
                 {% set sumratingsi = sumratingsi + sumratingss|round(0, 'floor') %}
                 {% set sumratingss = (sumratingss - sumratingss|round(0, 'floor')) *60 %}
             {% endif %}
-            <p>Gemiddelde sessieduur: {{  sumratingsH|round(0, 'floor') }}:{{  "%02d"|format(sumratingsi|round(0, 'floor')) }}:{{  "%02d"|format(sumratingss|round)  }}</p>
+            <p>{{  sumratingsH|round(0, 'floor') }}:{{  "%02d"|format(sumratingsi|round(0, 'floor')) }}:{{  "%02d"|format(sumratingss|round)  }}</p>
 
+            <div id="checkin_users" style="width:100%; height:400px;"></div>
 
+            {#{% set results = {} %}
 
+            {% for checkin in checkins %}
+                {% set prevresult = checkin.timein|date('d-m-Y') %}
+                {% if prevresult == checkin.timein|date('d-m-Y')  %}
+                    {% set results = results|merge([prevresult]) %}
+                {% endif %}
+            {% endfor %}
+            {{ dump(checkins) }}#}
 
         </div>
     </div>
+    <script type="text/javascript">
+        window.onload = function () {
+            var chart = new CanvasJS.Chart("checkin_users", {
+
+                title:{
+                    text: "Checkins per dag"
+                },
+                data: [//array of dataSeries
+                    { //dataSeries object
+
+                        /*** Change type "column" to "bar", "area", "line" or "pie"***/
+                        type: "column",
+                        dataPoints: [
+                            { label: "banana", y: 18 },
+                            { label: "orange", y: 29 },
+                            { label: "apple", y: 40 },
+                            { label: "mango", y: 34 },
+                            { label: "grape", y: 24 }
+                        ]
+                    }
+                ]
+            });
+
+            chart.render();
+        }
+    </script>
 {% endblock %}

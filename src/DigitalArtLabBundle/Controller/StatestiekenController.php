@@ -38,6 +38,9 @@ class StatestiekenController extends Controller
            $time = sum_the_time($time, date_format($checkin->getSessionduration(), 'H:i:s') );
         }
 
+        # var_dump(array_count_values($checkins));#}
+
+
         return $this->render('DigitalArtLabBundle:admin:stats.html.twig', array(
             'transactions' => $transactions,
             'users' => $users,
