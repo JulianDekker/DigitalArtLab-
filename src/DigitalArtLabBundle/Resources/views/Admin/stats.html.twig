@@ -1,5 +1,57 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+    <div class="content-container">
+        <h2 class="h2">Statistieken</h2>
+        {% set totaltransactionup = 0 %}
+        {% set totaltransactiondown = 0 %}
+        {% for transaction in transactions %}
+            {% if transaction.amount > 0 %}
+                {% set totaltransactionup = totaltransactionup + transaction.amount %}
+            {% elseif transaction.amount < 0 %}
+                {% set totaltransactiondown = totaltransactiondown + transaction.amount %}
+            {% endif %}
+        {% endfor %}
+        <div class="stat">
+            <h2>Totaal opgewaardeerd</h2>
+            {{ totaltransactionup }}
+            <h2>Totaal afgeschreven</h2>
+            {{ totaltransactiondown }}
+        </div>
+        <div class="stat">
+            <h2>Uren totaal</h2>
+            {{ totaaluren }}
+            <h2>Gemiddelde sessieduur</h2>
 
+            {% set sumratingsH = '0' %}
+            {% set sumratingsi = '0' %}
+            {% set sumratingss = '0' %}
+            {% for checkin in checkins %}
+                {% if checkin.sessionduration %}
+                    {% set sumratingsH = sumratingsH + checkin.sessionduration|date('H') / loop.length %}
+                    {% set sumratingsi = sumratingsi + checkin.sessionduration|date('i') / loop.length %}
+                    {% set sumratingss = sumratingss + checkin.sessionduration|date('s') / loop.length %}
+                {% endif %}
+            {% endfor %}
+            {% set sumratingshl = (sumratingsH - sumratingsH|round(0, 'floor')) *60 %}
+            {% set sumratingsi = sumratingsi + sumratingshl %}
+            {%  if sumratingsi > 60 %}
+                {% set sumratingsi = sumratingsi / 60 %}
+                {% set sumratingsH = sumratingsH + sumratingsi|round(0, 'floor') %}
+                {% set sumratingsi = (sumratingsi - sumratingsi|round(0, 'floor')) *60 %}
+            {% endif %}
+            {% set sumratingsil = (sumratingsi - sumratingsi|round(0, 'floor')) *60 %}
+            {% set sumratingss = sumratingss + sumratingsil %}
+            {%  if sumratingss > 60 %}
+                {% set sumratingss = sumratingss / 60 %}
+                {% set sumratingsi = sumratingsi + sumratingss|round(0, 'floor') %}
+                {% set sumratingss = (sumratingss - sumratingss|round(0, 'floor')) *60 %}
+            {% endif %}
+            <p>Gemiddelde sessieduur: {{  sumratingsH|round(0, 'floor') }}:{{  "%02d"|format(sumratingsi|round(0, 'floor')) }}:{{  "%02d"|format(sumratingss|round)  }}</p>
+
+
+
+
+        </div>
+    </div>
 {% endblock %}

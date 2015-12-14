@@ -33,12 +33,35 @@ class StatestiekenController extends Controller
         $users = $em->getRepository('DigitalArtLabBundle:User')->findAll();
         $checkins = $em->getRepository('DigitalArtLabBundle:checkin')->findBy([], ['timein' => 'DESC']);
 
+        $time = '00:00:00';
+        foreach ($checkins as $checkin){
+           $time = sum_the_time($time, date_format($checkin->getSessionduration(), 'H:i:s') );
+        }
 
         return $this->render('DigitalArtLabBundle:admin:stats.html.twig', array(
             'transactions' => $transactions,
             'users' => $users,
-            'checkins' => $checkins
+            'checkins' => $checkins,
+            'totaaluren' => $time,
         ));
     }
 
+}
+
+function sum_the_time($time1, $time2) {
+    $times = array($time1, $time2);
+    $seconds = 0;
+    foreach ($times as $time)
+    {
+        list($hour,$minute,$second) = explode(':', $time);
+        $seconds += $hour*3600;
+        $seconds += $minute*60;
+        $seconds += $second;
+    }
+    $hours = floor($seconds/3600);
+    $seconds -= $hours*3600;
+    $minutes  = floor($seconds/60);
+    $seconds -= $minutes*60;
+    // return "{$hours}:{$minutes}:{$seconds}";
+    return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds); // Thanks to Patrick
 }
