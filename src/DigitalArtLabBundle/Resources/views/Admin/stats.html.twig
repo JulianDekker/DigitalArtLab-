@@ -65,6 +65,7 @@
 
                         /*** Change type "column" to "bar", "area", "line" or "pie"***/
                         type: "column",
+                        yValueFormatString:"# Sessie('s)",
                         dataPoints: [
                             {% for key,sessions in groupsessions %}
                             { label: "{{ key }}", y: {{ sessions }} },
