@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints\DateTime;
 /**
  * admin controller.
  * @Route("/admin/stats")
- * @entity(repositoryClass="DigitalArtLabBundle\Entity\statsRepository)
  */
 class StatestiekenController extends Controller
 {
@@ -39,14 +38,19 @@ class StatestiekenController extends Controller
            $time = sum_the_time($time, date_format($checkin->getSessionduration(), 'H:i:s') );
         }
 
-        # var_dump(array_count_values($checkins));#}
-
+        $groupsessions = $em->getRepository('DigitalArtLabBundle:checkin')->groupSessions();
+        $newsession = array();
+        foreach ($groupsessions as $session){
+            array_push($newsession, $session['date']);
+        }
+        $count = array_count_values($newsession);
 
         return $this->render('DigitalArtLabBundle:admin:stats.html.twig', array(
             'transactions' => $transactions,
             'users' => $users,
             'checkins' => $checkins,
             'totaaluren' => $time,
+            'groupsessions' => $count,
         ));
     }
 

@@ -3,6 +3,7 @@
 namespace DigitalArtLabBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use DoctrineExtensions\Query\Mysql;
 
 /**
  * checkinRepository
@@ -22,6 +23,15 @@ class checkinRepository extends EntityRepository
                 'username' => $username,
             ))
             ->setMaxResults(20)
+            ->getResult();
+    }
+
+    public function groupSessions()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT p, SUBSTRING(p.timein, 1, 10) as date FROM DigitalArtLabBundle:checkin p ORDER BY date'
+            )
             ->getResult();
     }
 }
