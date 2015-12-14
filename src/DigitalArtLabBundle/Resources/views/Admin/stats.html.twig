@@ -51,15 +51,16 @@
 
             <div id="checkin_users" style="width:100%; height:400px;"></div>
 
-            {#{% set results = {} %}
+            {% set results = {} %}
 
             {% for checkin in checkins %}
                 {% set prevresult = checkin.timein|date('d-m-Y') %}
                 {% if prevresult == checkin.timein|date('d-m-Y')  %}
-                    {% set results = results|merge([prevresult]) %}
+                    {% set checkin.timein|date('d-m-Y') = [] %}
+                    {% set checkin.timein|date('d-m-Y') =+ checkin.timein|date('d-m-Y')|merge([prevresult]) %}
                 {% endif %}
             {% endfor %}
-            {{ dump(checkins) }}#}
+            {{ dump(checkins) }}
 
         </div>
     </div>

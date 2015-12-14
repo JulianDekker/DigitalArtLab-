@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 /**
  * admin controller.
  * @Route("/admin/stats")
+ * @entity(repositoryClass="DigitalArtLabBundle\Entity\statsRepository)
  */
 class StatestiekenController extends Controller
 {
