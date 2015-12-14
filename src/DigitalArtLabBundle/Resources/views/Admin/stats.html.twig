@@ -51,8 +51,6 @@
 
             <div id="checkin_users" style="width:100%; height:400px;"></div>
 
-                {{ dump(groupsessions) }}
-
         </div>
     </div>
     <script type="text/javascript">
@@ -68,11 +66,9 @@
                         /*** Change type "column" to "bar", "area", "line" or "pie"***/
                         type: "column",
                         dataPoints: [
-                            { label: "banana", y: 18 },
-                            { label: "orange", y: 29 },
-                            { label: "apple", y: 40 },
-                            { label: "mango", y: 34 },
-                            { label: "grape", y: 24 }
+                            {% for key,sessions in groupsessions %}
+                            { label: "{{ key }}", y: {{ sessions }} },
+                            {% endfor %}
                         ]
                     }
                 ]
