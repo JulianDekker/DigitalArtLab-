@@ -389,7 +389,12 @@ tr.actions-row td{
 
 }
 
+/*================Statistieken=============*/
 
+#created_users, #checkin_users, #transaction_day{
+    width: 50%;
+    height: 400px;
+}
 
 
 

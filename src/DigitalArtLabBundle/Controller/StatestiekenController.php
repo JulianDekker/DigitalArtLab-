@@ -54,12 +54,31 @@ class StatestiekenController extends Controller
 
 
         $grouptransactions = $em->getRepository('DigitalArtLabBundle:transaction')->groupTransactions();
-        $transactionstats = array();
-        foreach ($grouptransactions as $transaction){
-            array_push($transactionstats, $transaction['date'] , $transaction[0]->getamount());
-        }
-        /*$counttransactions = array_count_values($transactionstats);*/
 
+        $transactiondates = array();
+        foreach ($grouptransactions as $transaction){
+            array_push($transactiondates, $transaction['date']);
+        }
+        $counttransactions = array_count_values( $transactiondates);
+        $totaluparray = array();
+        $totaldownarray = array();
+        foreach ($counttransactions as $key => $date){
+            $totalup = 0;
+            $totaldown = 0;
+            foreach ($grouptransactions as $transaction){
+                if ($key == $transaction['date']){
+                    if ($transaction[0]->getAmount() > 0){
+                        $totalup += $transaction[0]->getAmount();
+                    }
+                    if ($transaction[0]->getAmount() < 0){
+                        $totaldown += ($transaction[0]->getAmount()-$transaction[0]->getAmount()-$transaction[0]->getAmount());
+                    }
+                }
+
+            }
+            array_push($totaluparray, array($key => $totalup));
+            array_push($totaldownarray, array($key => $totaldown));
+        }
 
 
         return $this->render('DigitalArtLabBundle:admin:stats.html.twig', array(
@@ -69,7 +88,8 @@ class StatestiekenController extends Controller
             'totaaluren' => $time,
             'groupsessions' => $count,
             'createdusers' => $countusers,
-            'grouptransactions' => $transactionstats
+            'grouptransactionsup' => $totaluparray,
+            'grouptransactionsdown' => $totaldownarray,
         ));
     }
 
