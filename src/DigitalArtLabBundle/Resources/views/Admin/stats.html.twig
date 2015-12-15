@@ -3,7 +3,6 @@
 {% block body -%}
     <div class="content-container">
         <h2 class="h2">Statistieken</h2>
-        <a href="{{ path('admin') }}">Terug naar dashboard</a>
         {% set totaltransactionup = 0 %}
         {% set totaltransactiondown = 0 %}
         {% for transaction in transactions %}
@@ -50,17 +49,22 @@
             {% endif %}
             <p>{{  sumratingsH|round(0, 'floor') }}:{{  "%02d"|format(sumratingsi|round(0, 'floor')) }}:{{  "%02d"|format(sumratingss|round)  }}</p>
 
-            <div id="checkin_users" style="width:100%; height:400px;"></div>
-            <div id="created_users" style="width:100%; height:400px;"></div>
-            <div id="transactions_day" style="width:100%; height:400px;"></div>
+
         </div>
+        <div id="checkin_users" ></div>
+        <div id="created_users" ></div>
+        <div id="transactions_day" ></div>
+        <div class="btn-fill admin_button_container">
+            <a href="{{ path('admin') }}" class="button">Terug naar dashboard</a>
+        </div>
+        <div class="clear"></div>
     </div>
     <script type="text/javascript">
         window.onload = function () {
             var chart = new CanvasJS.Chart("checkin_users", {
 
                 title:{
-                    text: "Checkins per dag"
+                    text: "Aanmeldingen per dag"
                 },
                 data: [//array of dataSeries
                     { //dataSeries object

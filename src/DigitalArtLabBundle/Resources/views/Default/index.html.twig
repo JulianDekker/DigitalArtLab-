@@ -3,6 +3,13 @@
 {% block body -%}
 <div class="content-container">
     <h2 class="h2">Welkom Bij het Digital Art Lab</h2>
+    <div class="introduction">orem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae ligula sit amet turpis ornare lacinia. Mauris nec mi non odio sollicitudin auctor. Fusce ac sem id libero accumsan tincidunt eget at diam. Duis rhoncus pellentesque dui quis imperdiet. Etiam at imperdiet felis. Nam bibendum porttitor dolor in tincidunt. Integer eget felis risus.</div>
+    <div class="homepage_block">
+        <h2 class="h2">Inloggen</h2>
+        <p>Word lid van het lab!</p>
+        <a href="{{ path('fos_user_security_login') }}">Login</a> of <a href="{{ path('fos_user_registration_register') }}">Registreer</a>
+
+    </div>
 </div>
 
 {% endblock %}

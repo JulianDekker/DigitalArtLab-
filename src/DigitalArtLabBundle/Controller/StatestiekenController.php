@@ -35,7 +35,9 @@ class StatestiekenController extends Controller
 
         $time = '00:00:00';
         foreach ($checkins as $checkin){
-           $time = sum_the_time($time, date_format($checkin->getSessionduration(), 'H:i:s') );
+           if (!is_null($checkin->getSessionduration())){
+            $time = sum_the_time($time, date_format($checkin->getSessionduration(), 'H:i:s') );
+           }
         }
 
         $groupsessions = $em->getRepository('DigitalArtLabBundle:checkin')->groupSessions();

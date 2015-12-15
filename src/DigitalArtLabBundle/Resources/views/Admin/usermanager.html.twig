@@ -4,8 +4,10 @@
 <div class="content-container">
 
     <h2 class="h2">Gebruikersbeheer</h2><div id="response-message"></div>
-    <a href="{{ path('fos_user_registration_register') }}">Gebruiker toevoegen</a>
-    <a href="{{ path('admin') }}">Terug naar overzicht</a>
+    <div class="btn-fill admin_button_container">
+        <a href="{{ path('admin') }}" class="button">Terug naar overzicht</a>
+        <a href="{{ path('fos_user_registration_register') }}" class="button">Gebruiker toevoegen</a>
+    </div>
 
     <table class="usermanager">
         <tr class="th">
