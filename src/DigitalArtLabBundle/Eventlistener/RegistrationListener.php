@@ -6,8 +6,7 @@ use FOS\UserBundle\Event\FormEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-
-
+use Symfony\Component\Validator\Constraints\DateTime;
 
 
 /**
@@ -30,6 +29,7 @@ class RegistrationListener implements EventSubscriberInterface
         $checkInUrl = 'http://localhost:1337/digitalartlab/web/profile/' . $username . '/checkin';
         $user->setCheckinurl($checkInUrl);
         $user->setSaldo(0);
+        $user->setDatecreated(new \DateTime());
     }
 
 }

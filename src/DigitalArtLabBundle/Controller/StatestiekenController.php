@@ -45,12 +45,31 @@ class StatestiekenController extends Controller
         }
         $count = array_count_values($newsession);
 
+        $groupusers = $em->getRepository('DigitalArtLabBundle:User')->groupUsers();
+        $newusers = array();
+        foreach ($groupusers as $user){
+            array_push($newusers, $user['date']);
+        }
+        $countusers = array_count_values($newusers);
+
+
+        $grouptransactions = $em->getRepository('DigitalArtLabBundle:transaction')->groupTransactions();
+        $transactionstats = array();
+        foreach ($grouptransactions as $transaction){
+            array_push($transactionstats, $transaction['date'] , $transaction[0]->getamount());
+        }
+        /*$counttransactions = array_count_values($transactionstats);*/
+
+
+
         return $this->render('DigitalArtLabBundle:admin:stats.html.twig', array(
             'transactions' => $transactions,
             'users' => $users,
             'checkins' => $checkins,
             'totaaluren' => $time,
             'groupsessions' => $count,
+            'createdusers' => $countusers,
+            'grouptransactions' => $transactionstats
         ));
     }
 

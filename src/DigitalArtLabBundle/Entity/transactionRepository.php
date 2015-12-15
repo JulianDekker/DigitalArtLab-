@@ -10,4 +10,12 @@ namespace DigitalArtLabBundle\Entity;
  */
 class transactionRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function groupTransactions()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT z, SUBSTRING(z.time, 1, 10) as date FROM DigitalArtLabBundle:transaction z ORDER BY date'
+            )
+            ->getResult();
+    }
 }

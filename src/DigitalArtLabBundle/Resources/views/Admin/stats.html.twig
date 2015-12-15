@@ -3,6 +3,7 @@
 {% block body -%}
     <div class="content-container">
         <h2 class="h2">Statistieken</h2>
+        <a href="{{ path('admin') }}">Terug naar dashboard</a>
         {% set totaltransactionup = 0 %}
         {% set totaltransactiondown = 0 %}
         {% for transaction in transactions %}
@@ -50,7 +51,8 @@
             <p>{{  sumratingsH|round(0, 'floor') }}:{{  "%02d"|format(sumratingsi|round(0, 'floor')) }}:{{  "%02d"|format(sumratingss|round)  }}</p>
 
             <div id="checkin_users" style="width:100%; height:400px;"></div>
-
+            <div id="created_users" style="width:100%; height:400px;"></div>
+            {{ dump(grouptransactions) }}
         </div>
     </div>
     <script type="text/javascript">
@@ -76,6 +78,28 @@
             });
 
             chart.render();
+
+            var chart2 = new CanvasJS.Chart("created_users", {
+
+                title:{
+                    text: "Nieuwe gebruikers per dag"
+                },
+                data: [//array of dataSeries
+                    { //dataSeries object
+
+                        /*** Change type "column" to "bar", "area", "line" or "pie"***/
+                        type: "column",
+                        yValueFormatString:"# Nieuwe gebruiker('s)",
+                        dataPoints: [
+                            {% for key,users in createdusers %}
+                            { label: "{{ key }}", y: {{ users }} },
+                            {% endfor %}
+                        ]
+                    }
+                ]
+            });
+
+            chart2.render();
         }
     </script>
 {% endblock %}

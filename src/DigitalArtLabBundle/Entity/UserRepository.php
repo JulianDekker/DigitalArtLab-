@@ -15,5 +15,13 @@ class UserRepository extends EntityRepository
             ->getResult();
     }
 
+    public function groupUsers()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT b, SUBSTRING(b.datecreated, 1, 10) as date FROM DigitalArtLabBundle:User b ORDER BY date'
+            )
+            ->getResult();
+    }
 
 }

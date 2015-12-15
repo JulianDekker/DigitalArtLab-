@@ -116,6 +116,32 @@ class User extends BaseUser
 
     protected $nieuwsbrief;
 
+
+    /**
+     * @ORM\Column(type="datetime", length=100, nullable=true)
+     */
+
+    protected $datecreated;
+
+    /**
+     * @return mixed
+     */
+    public function getDatecreated()
+    {
+        return $this->datecreated;
+    }
+
+    /**
+     * @param mixed $datecreated
+     */
+    public function setDatecreated($datecreated)
+    {
+        $this->datecreated = $datecreated;
+    }
+
+
+
+
     /**
      * @return mixed
      */
