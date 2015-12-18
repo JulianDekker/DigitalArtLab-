@@ -1,0 +1,77 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic);
+/*@page {
+    margin: 0;
+    size: 320px 200px;
+}*/
+
+    * {
+        margin: 0;
+        padding: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .print_card {
+        width: 298px;
+        height: 180px;
+        background: url('../../../web/bundles/digitalartlab/images/pattern.jpg') #222222 !important;
+        content: url('../../../web/bundles/digitalartlab/images/pattern.jpg') #222222 !important;
+        background-size: 100% auto ;
+        font-family: "open sans";
+        /*position: relative;
+        top: 50%;
+        left: 50%;
+        margin: -149px 0 0 -140px;
+        page-break-after: always;*/
+    }
+    canvas{
+        background: #fff;
+        padding: 5px;
+    }
+    .qrcode{
+        padding: 10px;
+        float: left;
+    }
+    h1.undertitle{
+        margin-top: 5px;
+    }
+    .user {
+        font-size: 14px;
+        float: left;
+        color: #fff;
+        margin-left: 10px;
+        margin-top: 15px;
+        max-width: 142px;
+    }
+    h1{font-size:14px}
+
+    .underline{
+        width: 100%;
+        float: left;
+    }
+
+    .url, .date{
+        color: #fff;
+        width: 50%;
+        margin-top: 25px;
+        float: left;
+        padding-left: 10px;
+        box-sizing: border-box;
+        font-size: 12px;
+    }
+
+    .date{
+        float: right;
+        padding-right: 20px;
+        text-align: right;
+    }
+
+    .print_card.back{
+        background: url('../../../web/bundles/digitalartlab/images/print_back.jpg') #222222 !important;
+        content: url('../../../web/bundles/digitalartlab/images/print_back.jpg') #222222 !important;
+        /*margin: -201px 0 0 -149px;*/
+    }
+
+    table{
+        width: 100%;
+    }
