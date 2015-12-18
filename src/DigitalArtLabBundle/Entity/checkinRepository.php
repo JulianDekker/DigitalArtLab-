@@ -22,7 +22,7 @@ class checkinRepository extends EntityRepository
             ->setParameters(array(
                 'username' => $username,
             ))
-            ->setMaxResults(20)
+            ->setMaxResults(7)
             ->getResult();
     }
 

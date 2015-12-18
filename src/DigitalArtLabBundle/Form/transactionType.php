@@ -15,8 +15,8 @@ class transactionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('user', null)
-            ->add('amount')
+            ->add('user', null, array('label' => 'Kies een gebruiker', 'attr' => array('class'=>'input50'), 'label_attr' => array('class' => 'label100')))
+            ->add('amount', null, array('label' => 'Kies een hoeveelheid', 'attr' => array('class'=>'input50'), 'label_attr' => array('class' => 'label100')))
         ;
     }
     

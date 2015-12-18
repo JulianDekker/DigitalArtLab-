@@ -24,10 +24,23 @@
                 {% endif %}
             </p>
         </div>
-        <a href="{{ path('fos_user_profile_edit') }}">Bewerk gegevens</a>
+        {% if user.username == app.user.username %}<a href="{{ path('fos_user_profile_edit') }}">Bewerk gegevens</a>{% endif %}
     </div>
-    <div class="side-content">
+    <div class="side-content stats">
         <h2 class="h2">Stats</h2>
+        <div id="response-message"></div>
+        {% if user.aanwezig == 1 %}
+            <a href="{{ path('checkin', {'username': user.username}) }}">Afmelden</a><br>
+        {% elseif user.aanwezig == 0 %}
+            <a href="{{ path('checkin', {'username': user.username}) }}">Aanmelden</a><br>
+        {% endif %}
+        <a href="#" class="opensaldoform userform">Saldo Wijzigen</a>
+        <form class="user_transaction_form">
+            <label>Gebruikersnaam: </label><input type="text" value="{{ user.username }}" disabled="disabled" />
+            <label>Hoeveelheid: </label><input type="number">
+            <input type="submit" value="Bij/Afschrijven" class="transactionbutton">
+        </form>
+        <hr>
         {% set sumratingsH = '0' %}
         {% set sumratingsi = '0' %}
         {% set sumratingss = '0' %}
@@ -53,6 +66,8 @@
             {% set sumratingss = (sumratingss - sumratingss|round(0, 'floor')) *60 %}
         {% endif %}
         <p>Gemiddelde sessieduur: {{  sumratingsH|round(0, 'floor') }}:{{  "%02d"|format(sumratingsi|round(0, 'floor')) }}:{{  "%02d"|format(sumratingss|round)  }}</p>
+        <p>Huidig saldo: <span id="{{ user.username }}">{{ user.saldo }}</span></p>
+
         {% if is_granted('ROLE_ADMIN') or user.username == app.user.username %}
             {% if ses %}
                 <h2 class="h2">Sessies</h2>
@@ -67,3 +82,43 @@
         {% endif %}
     </div>
 </div>
+<script>
+
+    $(document).ready(function(){
+        $('.transactionbutton').on('click', function(event){
+            event.preventDefault();
+            var user = $(this).parent().find('input[type="text"]').val();
+            var amount = $(this).parent().find('input[type="number"]').val();
+            var parent = $('.side-content');
+            acreateTransaction(user,amount,parent);
+        });
+
+    });
+
+    function acreateTransaction(user, amount, parent){
+        console.log(user, amount);
+        $.post(
+                '{{path('DigitalArtLabBundle_ajax_create_transaction')}}',
+                {userdata: user, amountdata: amount},
+                function(response){
+                    if(response.code == 100 && response.success){//dummy check
+                        var count = $('#'+user).text();
+                        $('#'+user).prop('Counter',count).animate({
+                            Counter: response.newsaldo
+                        }, {
+                            duration: 500,
+                            easing: 'swing',
+                            step: function (now) {
+                                $(this).text(Math.ceil(now));
+                            }
+                        });
+                        $(parent).find('.user_transaction_form').slideToggle().find('input[type="number"]').val(null);
+                        $('#response-message').addClass('succes').removeClass('error').text('Transactie geslaagd! saldo van '+ user+ ' aangepast .' );
+                    }
+                    if(response.code == 200 || response.success == false){
+                        $('#response-message').addClass('error').removeClass('succes').text('Transactie mislukt, gebruiker '+ user + ' Heeft niet genoeg saldo.');
+                    }
+
+                }, "json");
+    }
+</script>

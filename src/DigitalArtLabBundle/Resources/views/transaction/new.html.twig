@@ -1,19 +1,21 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>transaction creation</h1>
+<div class="content-container">
+        <h2 class="h2">Nieuwe transactie</h2>
 
-    {{ form_start(form) }}
-    Gebruikersnaam{{ form_widget(form.user) }}
-    {{ form_rest(form) }}
+        {{ form_start(form) }}
+        {{ form_row(form.user) }}
+        {{ form_row(form.amount) }}
 
-    {{ form_end(form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_transaction') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+        <div class="admin_button_container btn-fill">
+            <a href="{{ path('admin_transaction') }}" class="button">
+                Terug naar overzicht
+            </a>
+            {{ form_row(form.submit, {'attr': {'class': 'button'}}) }}
+        </div>
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+</div>
 {% endblock %}
