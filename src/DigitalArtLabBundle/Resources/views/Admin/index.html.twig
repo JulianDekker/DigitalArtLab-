@@ -28,7 +28,7 @@
             <hr>
             <ul class="userlist">
             {% for user in aanwezig %}
-                <li><a href="{{ path('userprofile', {'username': user.username}) }}" target="_blank">{{ user.firstname }} {{ user.lastname }}</a></li>
+                <li><a href="{{ path('userprofile', {'username': user.username}) }}" target="_blank">{{ user.firstname }} {{ user.lastname }}</li>
             {% endfor %}
             </ul>
         </div>

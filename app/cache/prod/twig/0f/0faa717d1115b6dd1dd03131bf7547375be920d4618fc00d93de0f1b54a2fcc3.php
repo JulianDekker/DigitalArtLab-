@@ -115,7 +115,7 @@ $context["users"], "aanwezig", array()) == 0)) {
                 <td><a href=\"";
             // line 40
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("userprofile", array("username" => $this->getAttribute($context["users"], "username", array()))), "html", null, true);
-            echo "\" target=\"_blank\">Bekijk profiel</a></td>
+            echo "\">Bekijk profiel</a></td>
                 <td><a href=\"#\" onclick=\"appendFrame( '";
             // line 41
             echo twig_escape_filter($this->env, $this->getAttribute($context["users"], "username", array()), "html", null, true);
@@ -276,7 +276,7 @@ $context["users"], "aanwezig", array()) == 0)) {
 /* */
 /*             </tr>*/
 /*             <tr class="actions-row">*/
-/*                 <td><a href="{{ path('userprofile', {'username': users.username}) }}" target="_blank">Bekijk profiel</a></td>*/
+/*                 <td><a href="{{ path('userprofile', {'username': users.username}) }}">Bekijk profiel</a></td>*/
 /*                 <td><a href="#" onclick="appendFrame( '{{ users.username }}', {{ loop.index }} ); frames['frame{{ loop.index }}'].print();" >Print pas</a></td>*/
 /*                 <td><a href="#" class="opensaldoform">Saldo wijzigen</a></td>*/
 /*                 <td>*/

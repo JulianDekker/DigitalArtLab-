@@ -25,22 +25,26 @@
             </p>
         </div>
         {% if user.username == app.user.username %}<a href="{{ path('fos_user_profile_edit') }}">Bewerk gegevens</a>{% endif %}
+
     </div>
     <div class="side-content stats">
         <h2 class="h2">Stats</h2>
-        <div id="response-message"></div>
-        {% if user.aanwezig == 1 %}
-            <a href="{{ path('checkin', {'username': user.username}) }}">Afmelden</a><br>
-        {% elseif user.aanwezig == 0 %}
-            <a href="{{ path('checkin', {'username': user.username}) }}">Aanmelden</a><br>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div id="response-message"></div>
+            {% if user.aanwezig == 1 %}
+                <a href="{{ path('checkin', {'username': user.username}) }}">Afmelden</a><br>
+            {% elseif user.aanwezig == 0 %}
+                <a href="{{ path('checkin', {'username': user.username}) }}">Aanmelden</a><br>
+            {% endif %}
+            <a href="#" class="opensaldoform userform">Saldo Wijzigen</a>
+            <form class="user_transaction_form">
+                <label>Gebruikersnaam: </label><input type="text" value="{{ user.username }}" disabled="disabled" />
+                <label>Hoeveelheid: </label><input type="number">
+                <input type="submit" value="Bij/Afschrijven" class="transactionbutton">
+            </form>
+            <hr>
         {% endif %}
-        <a href="#" class="opensaldoform userform">Saldo Wijzigen</a>
-        <form class="user_transaction_form">
-            <label>Gebruikersnaam: </label><input type="text" value="{{ user.username }}" disabled="disabled" />
-            <label>Hoeveelheid: </label><input type="number">
-            <input type="submit" value="Bij/Afschrijven" class="transactionbutton">
-        </form>
-        <hr>
+
         {% set sumratingsH = '0' %}
         {% set sumratingsi = '0' %}
         {% set sumratingss = '0' %}
@@ -81,7 +85,35 @@
             {% endif %}
         {% endif %}
     </div>
+    {% if is_granted('ROLE_ADMIN') %}
+        {% if transaction is not empty or null  %}
+        <h2 class="h2">Transacties</h2>
+        <table class="usermanager transaction">
+            <thead>
+            <tr class="th">
+                <th>Id</th>
+                <th>Tijd</th>
+                <th>Oud saldo</th>
+                <th>Nieuw saldo</th>
+                <th>Verandering</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for entity in transaction %}
+                <tr>
+                    <td>{{ entity.id }}</td>
+                    <td>{% if entity.time %}{{ entity.time|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{{ entity.oldbalance }}</td>
+                    <td>{{ entity.newbalance }}</td>
+                    <td>{{ entity.amount }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {%  endif %}
+    {% endif %}
 </div>
+{% if is_granted('ROLE_ADMIN') %}
 <script>
 
     $(document).ready(function(){
@@ -122,3 +154,4 @@
                 }, "json");
     }
 </script>
+{% endif %}

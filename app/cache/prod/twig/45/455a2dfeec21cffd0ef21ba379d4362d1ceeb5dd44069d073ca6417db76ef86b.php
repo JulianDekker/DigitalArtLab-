@@ -88,7 +88,7 @@ class __TwigTemplate_6322e325c656797b9b357cc20fa1681a432ecf5a48aaba6121a84b0f835
             echo twig_escape_filter($this->env, $this->getAttribute($context["user"], "firstname", array()), "html", null, true);
             echo " ";
             echo twig_escape_filter($this->env, $this->getAttribute($context["user"], "lastname", array()), "html", null, true);
-            echo "</a></li>
+            echo "</li>
             ";
         }
         $_parent = $context['_parent'];
@@ -147,7 +147,7 @@ class __TwigTemplate_6322e325c656797b9b357cc20fa1681a432ecf5a48aaba6121a84b0f835
 /*             <hr>*/
 /*             <ul class="userlist">*/
 /*             {% for user in aanwezig %}*/
-/*                 <li><a href="{{ path('userprofile', {'username': user.username}) }}" target="_blank">{{ user.firstname }} {{ user.lastname }}</a></li>*/
+/*                 <li><a href="{{ path('userprofile', {'username': user.username}) }}" target="_blank">{{ user.firstname }} {{ user.lastname }}</li>*/
 /*             {% endfor %}*/
 /*             </ul>*/
 /*         </div>*/

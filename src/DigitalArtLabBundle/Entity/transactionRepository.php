@@ -18,4 +18,17 @@ class transactionRepository extends \Doctrine\ORM\EntityRepository
             )
             ->getResult();
     }
+
+    public function findLastTransactions($username)
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT a FROM DigitalArtLabBundle:transaction a WHERE a.user = :username ORDER BY a.time DESC'
+            )
+            ->setParameters(array(
+                'username' => $username,
+            ))
+            ->setMaxResults(10)
+            ->getResult();
+    }
 }

@@ -40,10 +40,12 @@ class ProfileController extends Controller
 
         $em = $this->get('doctrine')->getManager();
         $sessions = $em->getRepository('DigitalArtLabBundle:checkin')->findLastSessions($user->getUsername() );
+        $transactions = $em->getRepository('DigitalArtLabBundle:transaction')->findLastTransactions($user->getId() );
 
         return $this->render('FOSUserBundle:Profile:show.html.twig', array(
             'user' => $user,
-            'ses' => $sessions
+            'ses' => $sessions,
+            'transaction' => $transactions
         ));
     }
 
