@@ -55,6 +55,7 @@
                     <form class="user_transaction_form">
                         <label>Gebruikersnaam: </label><input type="text" value="{{ users.username }}" disabled="disabled" />
                         <label>Hoeveelheid: </label><input type="number">
+                        <label>Reden: </label><textarea></textarea>
                         <input type="submit" value="Bij/Afschrijven" class="transactionbutton">
                     </form>
                 </td>
@@ -70,17 +71,18 @@
             event.preventDefault();
             var user = $(this).parent().find('input[type="text"]').val();
             var amount = $(this).parent().find('input[type="number"]').val();
+            var reason = $(this).parent().find('textarea').val();
             var parent = $(this).parent().parent().parent();
-            acreateTransaction(user,amount,parent);
+            acreateTransaction(user,amount,reason,parent);
         });
 
     });
 
-    function acreateTransaction(user, amount, parent){
-        console.log(user, amount);
+    function acreateTransaction(user, amount, reason, parent){
+        console.log(user, amount, reason);
         $.post(
             '{{path('DigitalArtLabBundle_ajax_create_transaction')}}',
-            {userdata: user, amountdata: amount},
+            {userdata: user, amountdata: amount, reasondata: reason},
             function(response){
                 if(response.code == 100 && response.success){//dummy check
                     var count = $('#'+user).text();
@@ -93,6 +95,7 @@
                             $(this).text(Math.ceil(now));
                         }
                     });
+                    console.log(response.reasondata);
                     $(parent).find('.user_transaction_form').slideToggle().find('input[type="number"]').val(null);
                     $('#response-message').addClass('succes').removeClass('error').text('Transactie geslaagd! saldo van '+ user+ ' aangepast .' );
                 }

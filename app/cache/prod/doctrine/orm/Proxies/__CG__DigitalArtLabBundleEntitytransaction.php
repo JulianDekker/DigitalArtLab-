@@ -64,10 +64,10 @@ class transaction extends \DigitalArtLabBundle\Entity\transaction implements \Do
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'id', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'user', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'adminName', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'time', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'amount', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'oldbalance', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'newbalance');
+            return array('__isInitialized__', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'id', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'user', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'adminName', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'time', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'amount', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'oldbalance', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'newbalance', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'message');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'id', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'user', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'adminName', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'time', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'amount', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'oldbalance', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'newbalance');
+        return array('__isInitialized__', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'id', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'user', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'adminName', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'time', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'amount', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'oldbalance', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'newbalance', '' . "\0" . 'DigitalArtLabBundle\\Entity\\transaction' . "\0" . 'message');
     }
 
     /**
@@ -193,6 +193,28 @@ class transaction extends \DigitalArtLabBundle\Entity\transaction implements \Do
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUser', array($user));
 
         return parent::setUser($user);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getMessage()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getMessage', array());
+
+        return parent::getMessage();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setMessage($message)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setMessage', array($message));
+
+        return parent::setMessage($message);
     }
 
     /**

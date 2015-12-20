@@ -28,6 +28,7 @@
                 <th>Oud saldo</th>
                 <th>Nieuw saldo</th>
                 <th>Verandering</th>
+                <th>Reden</th>
             </tr>
         </thead>
         <tbody>
@@ -40,6 +41,7 @@
                 <td>{{ entity.oldbalance }}</td>
                 <td>{{ entity.newbalance }}</td>
                 <td>{{ entity.amount }}</td>
+                <td>{{ entity.message }}</td>
             </tr>
         {% endfor %}
         </tbody>

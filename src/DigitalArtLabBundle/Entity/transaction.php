@@ -82,6 +82,28 @@ class transaction
      */
     private $newbalance;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="message", type="string", length=255, nullable=true)
+     */
+    private $message;
+
+    /**
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * @param string $message
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+    }
 
     /**
      * Get id

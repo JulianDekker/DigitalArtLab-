@@ -68,7 +68,7 @@ hr{
     border-radius: 9px;
 }
 
-textarea.input100{
+textarea.input100, textarea.input50{
     min-height: 150px;
 }
 

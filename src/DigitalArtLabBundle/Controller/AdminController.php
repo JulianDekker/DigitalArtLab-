@@ -59,11 +59,17 @@ class AdminController extends Controller
         ));
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     * @Security("has_role('ROLE_ADMIN')")
+     */
     public function createTransactionAction(request $request){
         $em = $this->getDoctrine()->getManager();
 
         $amountdata = $request->request->get('amountdata');
         $userdata = $request->request->get('userdata');
+        $reasondata = $request->request->get('reasondata');
         $user = $em->getRepository('DigitalArtLabBundle:User')->findOneByUsername($userdata);
 
         $transaction = new transaction();
@@ -72,7 +78,7 @@ class AdminController extends Controller
         $transaction->setTime(new \DateTime());
         $transaction->setamount($amountdata);
         $transaction->setUser($user);
-
+        $transaction->setMessage($reasondata);
 
         $oldbalance = $user->getSaldo();
         $newbalance = $oldbalance + $amountdata;
@@ -85,7 +91,7 @@ class AdminController extends Controller
             $em->persist($transaction);
             $em->flush();
 
-            $response = array("code" => 100, "success" => true, "newsaldo" => $newbalance);
+            $response = array("code" => 100, "success" => true, "newsaldo" => $newbalance, "reasondata" => $reasondata);
         }
         else{
             $response = array("code" => 200, "success" => false,);

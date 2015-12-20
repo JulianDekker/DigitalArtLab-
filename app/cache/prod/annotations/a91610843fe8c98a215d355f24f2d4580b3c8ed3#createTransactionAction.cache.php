@@ -1,1 +1,1 @@
-<?php return unserialize('a:0:{}');
+<?php return unserialize('a:1:{i:0;O:57:"Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Security":1:{s:13:"' . "\0" . '*' . "\0" . 'expression";s:22:"has_role(\'ROLE_ADMIN\')";}}');

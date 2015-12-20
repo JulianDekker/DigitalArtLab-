@@ -17,6 +17,7 @@ class transactionType extends AbstractType
         $builder
             ->add('user', null, array('label' => 'Kies een gebruiker', 'attr' => array('class'=>'input50'), 'label_attr' => array('class' => 'label100')))
             ->add('amount', null, array('label' => 'Kies een hoeveelheid', 'attr' => array('class'=>'input50'), 'label_attr' => array('class' => 'label100')))
+            ->add('message', 'textarea', array('label' => 'Reden voor transactie', 'attr' => array('class'=>'input50'), 'label_attr' => array('class' => 'label100')))
         ;
     }
     

@@ -154,6 +154,7 @@ $context["users"], "aanwezig", array()) == 0)) {
             echo twig_escape_filter($this->env, $this->getAttribute($context["users"], "username", array()), "html", null, true);
             echo "\" disabled=\"disabled\" />
                         <label>Hoeveelheid: </label><input type=\"number\">
+                        <label>Reden: </label><textarea></textarea>
                         <input type=\"submit\" value=\"Bij/Afschrijven\" class=\"transactionbutton\">
                     </form>
                 </td>
@@ -172,7 +173,7 @@ $context["users"], "aanwezig", array()) == 0)) {
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['users'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 64
+        // line 65
         echo "    </table>
 </div>
 <script>
@@ -182,20 +183,21 @@ $context["users"], "aanwezig", array()) == 0)) {
             event.preventDefault();
             var user = \$(this).parent().find('input[type=\"text\"]').val();
             var amount = \$(this).parent().find('input[type=\"number\"]').val();
+            var reason = \$(this).parent().find('textarea').val();
             var parent = \$(this).parent().parent().parent();
-            acreateTransaction(user,amount,parent);
+            acreateTransaction(user,amount,reason,parent);
         });
 
     });
 
-    function acreateTransaction(user, amount, parent){
-        console.log(user, amount);
+    function acreateTransaction(user, amount, reason, parent){
+        console.log(user, amount, reason);
         \$.post(
             '";
-        // line 82
+        // line 84
         echo $this->env->getExtension('routing')->getPath("DigitalArtLabBundle_ajax_create_transaction");
         echo "',
-            {userdata: user, amountdata: amount},
+            {userdata: user, amountdata: amount, reasondata: reason},
             function(response){
                 if(response.code == 100 && response.success){//dummy check
                     var count = \$('#'+user).text();
@@ -208,6 +210,7 @@ $context["users"], "aanwezig", array()) == 0)) {
                             \$(this).text(Math.ceil(now));
                         }
                     });
+                    console.log(response.reasondata);
                     \$(parent).find('.user_transaction_form').slideToggle().find('input[type=\"number\"]').val(null);
                     \$('#response-message').addClass('succes').removeClass('error').text('Transactie geslaagd! saldo van '+ user+ ' aangepast .' );
                 }
@@ -234,7 +237,7 @@ $context["users"], "aanwezig", array()) == 0)) {
 
     public function getDebugInfo()
     {
-        return array (  196 => 82,  176 => 64,  154 => 56,  146 => 50,  142 => 48,  140 => 47,  137 => 46,  135 => 45,  131 => 44,  121 => 41,  117 => 40,  111 => 36,  107 => 34,  105 => 33,  102 => 32,  100 => 31,  97 => 30,  95 => 29,  88 => 27,  82 => 26,  78 => 25,  71 => 20,  54 => 19,  41 => 9,  37 => 8,  31 => 4,  28 => 3,  11 => 1,);
+        return array (  198 => 84,  177 => 65,  154 => 56,  146 => 50,  142 => 48,  140 => 47,  137 => 46,  135 => 45,  131 => 44,  121 => 41,  117 => 40,  111 => 36,  107 => 34,  105 => 33,  102 => 32,  100 => 31,  97 => 30,  95 => 29,  88 => 27,  82 => 26,  78 => 25,  71 => 20,  54 => 19,  41 => 9,  37 => 8,  31 => 4,  28 => 3,  11 => 1,);
     }
 }
 /* {% extends '::base.html.twig' %}*/
@@ -294,6 +297,7 @@ $context["users"], "aanwezig", array()) == 0)) {
 /*                     <form class="user_transaction_form">*/
 /*                         <label>Gebruikersnaam: </label><input type="text" value="{{ users.username }}" disabled="disabled" />*/
 /*                         <label>Hoeveelheid: </label><input type="number">*/
+/*                         <label>Reden: </label><textarea></textarea>*/
 /*                         <input type="submit" value="Bij/Afschrijven" class="transactionbutton">*/
 /*                     </form>*/
 /*                 </td>*/
@@ -309,17 +313,18 @@ $context["users"], "aanwezig", array()) == 0)) {
 /*             event.preventDefault();*/
 /*             var user = $(this).parent().find('input[type="text"]').val();*/
 /*             var amount = $(this).parent().find('input[type="number"]').val();*/
+/*             var reason = $(this).parent().find('textarea').val();*/
 /*             var parent = $(this).parent().parent().parent();*/
-/*             acreateTransaction(user,amount,parent);*/
+/*             acreateTransaction(user,amount,reason,parent);*/
 /*         });*/
 /* */
 /*     });*/
 /* */
-/*     function acreateTransaction(user, amount, parent){*/
-/*         console.log(user, amount);*/
+/*     function acreateTransaction(user, amount, reason, parent){*/
+/*         console.log(user, amount, reason);*/
 /*         $.post(*/
 /*             '{{path('DigitalArtLabBundle_ajax_create_transaction')}}',*/
-/*             {userdata: user, amountdata: amount},*/
+/*             {userdata: user, amountdata: amount, reasondata: reason},*/
 /*             function(response){*/
 /*                 if(response.code == 100 && response.success){//dummy check*/
 /*                     var count = $('#'+user).text();*/
@@ -332,6 +337,7 @@ $context["users"], "aanwezig", array()) == 0)) {
 /*                             $(this).text(Math.ceil(now));*/
 /*                         }*/
 /*                     });*/
+/*                     console.log(response.reasondata);*/
 /*                     $(parent).find('.user_transaction_form').slideToggle().find('input[type="number"]').val(null);*/
 /*                     $('#response-message').addClass('succes').removeClass('error').text('Transactie geslaagd! saldo van '+ user+ ' aangepast .' );*/
 /*                 }*/

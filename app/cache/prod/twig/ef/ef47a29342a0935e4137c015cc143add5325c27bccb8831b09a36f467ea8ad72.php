@@ -113,91 +113,92 @@ class __TwigTemplate_5b5b88b660629a3c0cff3be4b55bb34ead59f57369671b7891ad5e5b87f
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["user"]) ? $context["user"] : null), "username", array()), "html", null, true);
             echo "\" disabled=\"disabled\" />
                 <label>Hoeveelheid: </label><input type=\"number\">
+                <label>Reden: </label><textarea></textarea>
                 <input type=\"submit\" value=\"Bij/Afschrijven\" class=\"transactionbutton\">
             </form>
             <hr>
         ";
         }
-        // line 47
+        // line 48
         echo "
         ";
-        // line 48
-        $context["sumratingsH"] = "0";
         // line 49
-        echo "        ";
-        $context["sumratingsi"] = "0";
+        $context["sumratingsH"] = "0";
         // line 50
         echo "        ";
-        $context["sumratingss"] = "0";
+        $context["sumratingsi"] = "0";
         // line 51
+        echo "        ";
+        $context["sumratingss"] = "0";
+        // line 52
         echo "        ";
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["ses"]) ? $context["ses"] : null));
         foreach ($context['_seq'] as $context["_key"] => $context["session"]) {
-            // line 52
+            // line 53
             echo "            ";
             if ($this->getAttribute($context["session"], "sessionduration", array())) {
-                // line 53
-                echo "                ";
-                $context["sumratingsH"] = ((isset($context["sumratingsH"]) ? $context["sumratingsH"] : null) + (twig_date_format_filter($this->env, $this->getAttribute($context["session"], "sessionduration", array()), "H") / twig_length_filter($this->env, (isset($context["ses"]) ? $context["ses"] : null))));
                 // line 54
                 echo "                ";
-                $context["sumratingsi"] = ((isset($context["sumratingsi"]) ? $context["sumratingsi"] : null) + (twig_date_format_filter($this->env, $this->getAttribute($context["session"], "sessionduration", array()), "i") / twig_length_filter($this->env, (isset($context["ses"]) ? $context["ses"] : null))));
+                $context["sumratingsH"] = ((isset($context["sumratingsH"]) ? $context["sumratingsH"] : null) + (twig_date_format_filter($this->env, $this->getAttribute($context["session"], "sessionduration", array()), "H") / twig_length_filter($this->env, (isset($context["ses"]) ? $context["ses"] : null))));
                 // line 55
                 echo "                ";
-                $context["sumratingss"] = ((isset($context["sumratingss"]) ? $context["sumratingss"] : null) + (twig_date_format_filter($this->env, $this->getAttribute($context["session"], "sessionduration", array()), "s") / twig_length_filter($this->env, (isset($context["ses"]) ? $context["ses"] : null))));
+                $context["sumratingsi"] = ((isset($context["sumratingsi"]) ? $context["sumratingsi"] : null) + (twig_date_format_filter($this->env, $this->getAttribute($context["session"], "sessionduration", array()), "i") / twig_length_filter($this->env, (isset($context["ses"]) ? $context["ses"] : null))));
                 // line 56
+                echo "                ";
+                $context["sumratingss"] = ((isset($context["sumratingss"]) ? $context["sumratingss"] : null) + (twig_date_format_filter($this->env, $this->getAttribute($context["session"], "sessionduration", array()), "s") / twig_length_filter($this->env, (isset($context["ses"]) ? $context["ses"] : null))));
+                // line 57
                 echo "            ";
             }
-            // line 57
+            // line 58
             echo "        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['session'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 58
-        echo "        ";
-        $context["sumratingshl"] = (((isset($context["sumratingsH"]) ? $context["sumratingsH"] : null) - twig_round((isset($context["sumratingsH"]) ? $context["sumratingsH"] : null), 0, "floor")) * 60);
         // line 59
         echo "        ";
-        $context["sumratingsi"] = ((isset($context["sumratingsi"]) ? $context["sumratingsi"] : null) + (isset($context["sumratingshl"]) ? $context["sumratingshl"] : null));
+        $context["sumratingshl"] = (((isset($context["sumratingsH"]) ? $context["sumratingsH"] : null) - twig_round((isset($context["sumratingsH"]) ? $context["sumratingsH"] : null), 0, "floor")) * 60);
         // line 60
         echo "        ";
+        $context["sumratingsi"] = ((isset($context["sumratingsi"]) ? $context["sumratingsi"] : null) + (isset($context["sumratingshl"]) ? $context["sumratingshl"] : null));
+        // line 61
+        echo "        ";
         if (((isset($context["sumratingsi"]) ? $context["sumratingsi"] : null) > 60)) {
-            // line 61
-            echo "            ";
-            $context["sumratingsi"] = ((isset($context["sumratingsi"]) ? $context["sumratingsi"] : null) / 60);
             // line 62
             echo "            ";
-            $context["sumratingsH"] = ((isset($context["sumratingsH"]) ? $context["sumratingsH"] : null) + twig_round((isset($context["sumratingsi"]) ? $context["sumratingsi"] : null), 0, "floor"));
+            $context["sumratingsi"] = ((isset($context["sumratingsi"]) ? $context["sumratingsi"] : null) / 60);
             // line 63
             echo "            ";
-            $context["sumratingsi"] = (((isset($context["sumratingsi"]) ? $context["sumratingsi"] : null) - twig_round((isset($context["sumratingsi"]) ? $context["sumratingsi"] : null), 0, "floor")) * 60);
+            $context["sumratingsH"] = ((isset($context["sumratingsH"]) ? $context["sumratingsH"] : null) + twig_round((isset($context["sumratingsi"]) ? $context["sumratingsi"] : null), 0, "floor"));
             // line 64
+            echo "            ";
+            $context["sumratingsi"] = (((isset($context["sumratingsi"]) ? $context["sumratingsi"] : null) - twig_round((isset($context["sumratingsi"]) ? $context["sumratingsi"] : null), 0, "floor")) * 60);
+            // line 65
             echo "        ";
         }
-        // line 65
-        echo "        ";
-        $context["sumratingsil"] = (((isset($context["sumratingsi"]) ? $context["sumratingsi"] : null) - twig_round((isset($context["sumratingsi"]) ? $context["sumratingsi"] : null), 0, "floor")) * 60);
         // line 66
         echo "        ";
-        $context["sumratingss"] = ((isset($context["sumratingss"]) ? $context["sumratingss"] : null) + (isset($context["sumratingsil"]) ? $context["sumratingsil"] : null));
+        $context["sumratingsil"] = (((isset($context["sumratingsi"]) ? $context["sumratingsi"] : null) - twig_round((isset($context["sumratingsi"]) ? $context["sumratingsi"] : null), 0, "floor")) * 60);
         // line 67
         echo "        ";
+        $context["sumratingss"] = ((isset($context["sumratingss"]) ? $context["sumratingss"] : null) + (isset($context["sumratingsil"]) ? $context["sumratingsil"] : null));
+        // line 68
+        echo "        ";
         if (((isset($context["sumratingss"]) ? $context["sumratingss"] : null) > 60)) {
-            // line 68
-            echo "            ";
-            $context["sumratingss"] = ((isset($context["sumratingss"]) ? $context["sumratingss"] : null) / 60);
             // line 69
             echo "            ";
-            $context["sumratingsi"] = ((isset($context["sumratingsi"]) ? $context["sumratingsi"] : null) + twig_round((isset($context["sumratingss"]) ? $context["sumratingss"] : null), 0, "floor"));
+            $context["sumratingss"] = ((isset($context["sumratingss"]) ? $context["sumratingss"] : null) / 60);
             // line 70
             echo "            ";
-            $context["sumratingss"] = (((isset($context["sumratingss"]) ? $context["sumratingss"] : null) - twig_round((isset($context["sumratingss"]) ? $context["sumratingss"] : null), 0, "floor")) * 60);
+            $context["sumratingsi"] = ((isset($context["sumratingsi"]) ? $context["sumratingsi"] : null) + twig_round((isset($context["sumratingss"]) ? $context["sumratingss"] : null), 0, "floor"));
             // line 71
+            echo "            ";
+            $context["sumratingss"] = (((isset($context["sumratingss"]) ? $context["sumratingss"] : null) - twig_round((isset($context["sumratingss"]) ? $context["sumratingss"] : null), 0, "floor")) * 60);
+            // line 72
             echo "        ";
         }
-        // line 72
+        // line 73
         echo "        <p>Gemiddelde sessieduur: ";
         echo twig_escape_filter($this->env, twig_round((isset($context["sumratingsH"]) ? $context["sumratingsH"] : null), 0, "floor"), "html", null, true);
         echo ":";
@@ -206,29 +207,29 @@ class __TwigTemplate_5b5b88b660629a3c0cff3be4b55bb34ead59f57369671b7891ad5e5b87f
         echo twig_escape_filter($this->env, sprintf("%02d", twig_round((isset($context["sumratingss"]) ? $context["sumratingss"] : null))), "html", null, true);
         echo "</p>
         <p>Huidig saldo: <span id=\"";
-        // line 73
+        // line 74
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["user"]) ? $context["user"] : null), "username", array()), "html", null, true);
         echo "\">";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["user"]) ? $context["user"] : null), "saldo", array()), "html", null, true);
         echo "</span></p>
 
         ";
-        // line 75
+        // line 76
         if (($this->env->getExtension('security')->isGranted("ROLE_ADMIN") || ($this->getAttribute((isset($context["user"]) ? $context["user"] : null), "username", array()) == $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : null), "user", array()), "username", array())))) {
-            // line 76
+            // line 77
             echo "            ";
             if ((isset($context["ses"]) ? $context["ses"] : null)) {
-                // line 77
+                // line 78
                 echo "                <h2 class=\"h2\">Sessies</h2>
                 ";
-                // line 78
+                // line 79
                 $context['_parent'] = $context;
                 $context['_seq'] = twig_ensure_traversable((isset($context["ses"]) ? $context["ses"] : null));
                 foreach ($context['_seq'] as $context["_key"] => $context["sessions"]) {
-                    // line 79
+                    // line 80
                     echo "                    ";
                     if (((null === $this->getAttribute($context["sessions"], "timeout", array())) || twig_test_empty($this->getAttribute($context["sessions"], "timeout", array())))) {
-                        // line 80
+                        // line 81
                         echo "                        <p>Aanwezig sinds ";
                         if ((twig_date_format_filter($this->env, $this->getAttribute($context["sessions"], "timein", array()), "d-m-Y") == twig_date_format_filter($this->env, "now", "d-m-Y"))) {
                             echo "vandaag";
@@ -241,7 +242,7 @@ class __TwigTemplate_5b5b88b660629a3c0cff3be4b55bb34ead59f57369671b7891ad5e5b87f
                         echo "</p></br>
                     ";
                     } else {
-                        // line 82
+                        // line 83
                         echo "                        <p>In het lab geweest op ";
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["sessions"], "timein", array()), "d-m-Y"), "html", null, true);
                         echo " voor ";
@@ -249,27 +250,27 @@ class __TwigTemplate_5b5b88b660629a3c0cff3be4b55bb34ead59f57369671b7891ad5e5b87f
                         echo "</p></br>
                     ";
                     }
-                    // line 84
+                    // line 85
                     echo "                ";
                 }
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['sessions'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 85
+                // line 86
                 echo "            ";
             }
-            // line 86
+            // line 87
             echo "        ";
         }
-        // line 87
+        // line 88
         echo "    </div>
     ";
-        // line 88
+        // line 89
         if ($this->env->getExtension('security')->isGranted("ROLE_ADMIN")) {
-            // line 89
+            // line 90
             echo "        ";
             if (( !twig_test_empty((isset($context["transaction"]) ? $context["transaction"] : null)) || null)) {
-                // line 90
+                // line 91
                 echo "        <h2 class=\"h2\">Transacties</h2>
         <table class=\"usermanager transaction\">
             <thead>
@@ -279,37 +280,42 @@ class __TwigTemplate_5b5b88b660629a3c0cff3be4b55bb34ead59f57369671b7891ad5e5b87f
                 <th>Oud saldo</th>
                 <th>Nieuw saldo</th>
                 <th>Verandering</th>
+                <th>Reden</th>
             </tr>
             </thead>
             <tbody>
             ";
-                // line 102
+                // line 104
                 $context['_parent'] = $context;
                 $context['_seq'] = twig_ensure_traversable((isset($context["transaction"]) ? $context["transaction"] : null));
                 foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
-                    // line 103
+                    // line 105
                     echo "                <tr>
                     <td>";
-                    // line 104
+                    // line 106
                     echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "id", array()), "html", null, true);
                     echo "</td>
                     <td>";
-                    // line 105
+                    // line 107
                     if ($this->getAttribute($context["entity"], "time", array())) {
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["entity"], "time", array()), "Y-m-d H:i:s"), "html", null, true);
                     }
                     echo "</td>
                     <td>";
-                    // line 106
+                    // line 108
                     echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "oldbalance", array()), "html", null, true);
                     echo "</td>
                     <td>";
-                    // line 107
+                    // line 109
                     echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "newbalance", array()), "html", null, true);
                     echo "</td>
                     <td>";
-                    // line 108
+                    // line 110
                     echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "amount", array()), "html", null, true);
+                    echo "</td>
+                    <td>";
+                    // line 111
+                    echo twig_escape_filter($this->env, $this->getAttribute($context["entity"], "message", array()), "html", null, true);
                     echo "</td>
                 </tr>
             ";
@@ -317,20 +323,20 @@ class __TwigTemplate_5b5b88b660629a3c0cff3be4b55bb34ead59f57369671b7891ad5e5b87f
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entity'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 111
+                // line 114
                 echo "            </tbody>
         </table>
         ";
             }
-            // line 114
+            // line 117
             echo "    ";
         }
-        // line 115
+        // line 118
         echo "</div>
 ";
-        // line 116
+        // line 119
         if ($this->env->getExtension('security')->isGranted("ROLE_ADMIN")) {
-            // line 117
+            // line 120
             echo "<script>
 
     \$(document).ready(function(){
@@ -338,20 +344,21 @@ class __TwigTemplate_5b5b88b660629a3c0cff3be4b55bb34ead59f57369671b7891ad5e5b87f
             event.preventDefault();
             var user = \$(this).parent().find('input[type=\"text\"]').val();
             var amount = \$(this).parent().find('input[type=\"number\"]').val();
+            var reason = \$(this).parent().find('textarea').val();
             var parent = \$('.side-content');
-            acreateTransaction(user,amount,parent);
+            acreateTransaction(user,amount, reason, parent);
         });
 
     });
 
-    function acreateTransaction(user, amount, parent){
+    function acreateTransaction(user, amount, reason, parent){
         console.log(user, amount);
         \$.post(
                 '";
-            // line 133
+            // line 137
             echo $this->env->getExtension('routing')->getPath("DigitalArtLabBundle_ajax_create_transaction");
             echo "',
-                {userdata: user, amountdata: amount},
+                {userdata: user, amountdata: amount, reasondata: reason},
                 function(response){
                     if(response.code == 100 && response.success){//dummy check
                         var count = \$('#'+user).text();
@@ -390,7 +397,7 @@ class __TwigTemplate_5b5b88b660629a3c0cff3be4b55bb34ead59f57369671b7891ad5e5b87f
 
     public function getDebugInfo()
     {
-        return array (  352 => 133,  334 => 117,  332 => 116,  329 => 115,  326 => 114,  321 => 111,  312 => 108,  308 => 107,  304 => 106,  298 => 105,  294 => 104,  291 => 103,  287 => 102,  273 => 90,  270 => 89,  268 => 88,  265 => 87,  262 => 86,  259 => 85,  253 => 84,  245 => 82,  232 => 80,  229 => 79,  225 => 78,  222 => 77,  219 => 76,  217 => 75,  210 => 73,  201 => 72,  198 => 71,  195 => 70,  192 => 69,  189 => 68,  186 => 67,  183 => 66,  180 => 65,  177 => 64,  174 => 63,  171 => 62,  168 => 61,  165 => 60,  162 => 59,  159 => 58,  153 => 57,  150 => 56,  147 => 55,  144 => 54,  141 => 53,  138 => 52,  133 => 51,  130 => 50,  127 => 49,  125 => 48,  122 => 47,  113 => 41,  109 => 39,  103 => 37,  101 => 36,  96 => 35,  94 => 34,  91 => 33,  89 => 32,  83 => 28,  77 => 27,  73 => 25,  69 => 23,  67 => 22,  64 => 21,  62 => 20,  59 => 19,  57 => 18,  51 => 15,  46 => 13,  41 => 11,  34 => 9,  29 => 7,  23 => 4,  19 => 2,);
+        return array (  359 => 137,  340 => 120,  338 => 119,  335 => 118,  332 => 117,  327 => 114,  318 => 111,  314 => 110,  310 => 109,  306 => 108,  300 => 107,  296 => 106,  293 => 105,  289 => 104,  274 => 91,  271 => 90,  269 => 89,  266 => 88,  263 => 87,  260 => 86,  254 => 85,  246 => 83,  233 => 81,  230 => 80,  226 => 79,  223 => 78,  220 => 77,  218 => 76,  211 => 74,  202 => 73,  199 => 72,  196 => 71,  193 => 70,  190 => 69,  187 => 68,  184 => 67,  181 => 66,  178 => 65,  175 => 64,  172 => 63,  169 => 62,  166 => 61,  163 => 60,  160 => 59,  154 => 58,  151 => 57,  148 => 56,  145 => 55,  142 => 54,  139 => 53,  134 => 52,  131 => 51,  128 => 50,  126 => 49,  123 => 48,  113 => 41,  109 => 39,  103 => 37,  101 => 36,  96 => 35,  94 => 34,  91 => 33,  89 => 32,  83 => 28,  77 => 27,  73 => 25,  69 => 23,  67 => 22,  64 => 21,  62 => 20,  59 => 19,  57 => 18,  51 => 15,  46 => 13,  41 => 11,  34 => 9,  29 => 7,  23 => 4,  19 => 2,);
     }
 }
 /* {% trans_default_domain 'FOSUserBundle' %}*/
@@ -435,6 +442,7 @@ class __TwigTemplate_5b5b88b660629a3c0cff3be4b55bb34ead59f57369671b7891ad5e5b87f
 /*             <form class="user_transaction_form">*/
 /*                 <label>Gebruikersnaam: </label><input type="text" value="{{ user.username }}" disabled="disabled" />*/
 /*                 <label>Hoeveelheid: </label><input type="number">*/
+/*                 <label>Reden: </label><textarea></textarea>*/
 /*                 <input type="submit" value="Bij/Afschrijven" class="transactionbutton">*/
 /*             </form>*/
 /*             <hr>*/
@@ -491,6 +499,7 @@ class __TwigTemplate_5b5b88b660629a3c0cff3be4b55bb34ead59f57369671b7891ad5e5b87f
 /*                 <th>Oud saldo</th>*/
 /*                 <th>Nieuw saldo</th>*/
 /*                 <th>Verandering</th>*/
+/*                 <th>Reden</th>*/
 /*             </tr>*/
 /*             </thead>*/
 /*             <tbody>*/
@@ -501,6 +510,7 @@ class __TwigTemplate_5b5b88b660629a3c0cff3be4b55bb34ead59f57369671b7891ad5e5b87f
 /*                     <td>{{ entity.oldbalance }}</td>*/
 /*                     <td>{{ entity.newbalance }}</td>*/
 /*                     <td>{{ entity.amount }}</td>*/
+/*                     <td>{{ entity.message }}</td>*/
 /*                 </tr>*/
 /*             {% endfor %}*/
 /*             </tbody>*/
@@ -516,17 +526,18 @@ class __TwigTemplate_5b5b88b660629a3c0cff3be4b55bb34ead59f57369671b7891ad5e5b87f
 /*             event.preventDefault();*/
 /*             var user = $(this).parent().find('input[type="text"]').val();*/
 /*             var amount = $(this).parent().find('input[type="number"]').val();*/
+/*             var reason = $(this).parent().find('textarea').val();*/
 /*             var parent = $('.side-content');*/
-/*             acreateTransaction(user,amount,parent);*/
+/*             acreateTransaction(user,amount, reason, parent);*/
 /*         });*/
 /* */
 /*     });*/
 /* */
-/*     function acreateTransaction(user, amount, parent){*/
+/*     function acreateTransaction(user, amount, reason, parent){*/
 /*         console.log(user, amount);*/
 /*         $.post(*/
 /*                 '{{path('DigitalArtLabBundle_ajax_create_transaction')}}',*/
-/*                 {userdata: user, amountdata: amount},*/
+/*                 {userdata: user, amountdata: amount, reasondata: reason},*/
 /*                 function(response){*/
 /*                     if(response.code == 100 && response.success){//dummy check*/
 /*                         var count = $('#'+user).text();*/
