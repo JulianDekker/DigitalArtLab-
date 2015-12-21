@@ -64,7 +64,7 @@ class __TwigTemplate_6322e325c656797b9b357cc20fa1681a432ecf5a48aaba6121a84b0f835
             <a href=\"";
         // line 21
         echo $this->env->getExtension('routing')->getPath("admin_stats");
-        echo "\">Statestieken</a>
+        echo "\">Statistieken</a>
         </div>
     </div>
     <div class=\"side-content\">
@@ -137,7 +137,7 @@ class __TwigTemplate_6322e325c656797b9b357cc20fa1681a432ecf5a48aaba6121a84b0f835
 /*             <a href="{{ path('admin_checkin') }}">Sessie geschiedenis</a>*/
 /*         </div>*/
 /*         <div class="infoblock">*/
-/*             <a href="{{ path('admin_stats') }}">Statestieken</a>*/
+/*             <a href="{{ path('admin_stats') }}">Statistieken</a>*/
 /*         </div>*/
 /*     </div>*/
 /*     <div class="side-content">*/

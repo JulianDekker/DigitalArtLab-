@@ -154,7 +154,7 @@ $context["users"], "aanwezig", array()) == 0)) {
             echo twig_escape_filter($this->env, $this->getAttribute($context["users"], "username", array()), "html", null, true);
             echo "\" disabled=\"disabled\" />
                         <label>Hoeveelheid: </label><input type=\"number\">
-                        <label>Reden: </label><textarea></textarea>
+                        <label class=\"label100\">Reden: </label><textarea class=\"input100\"></textarea>
                         <input type=\"submit\" value=\"Bij/Afschrijven\" class=\"transactionbutton\">
                     </form>
                 </td>
@@ -297,7 +297,7 @@ $context["users"], "aanwezig", array()) == 0)) {
 /*                     <form class="user_transaction_form">*/
 /*                         <label>Gebruikersnaam: </label><input type="text" value="{{ users.username }}" disabled="disabled" />*/
 /*                         <label>Hoeveelheid: </label><input type="number">*/
-/*                         <label>Reden: </label><textarea></textarea>*/
+/*                         <label class="label100">Reden: </label><textarea class="input100"></textarea>*/
 /*                         <input type="submit" value="Bij/Afschrijven" class="transactionbutton">*/
 /*                     </form>*/
 /*                 </td>*/

@@ -399,6 +399,11 @@ tr.actions-row td{
     padding: 2px 15px;
 }
 
+.user_transaction_form textarea.input100{
+    min-height: 50px;
+    resize:vertical;
+}
+
 /*=====================Transacties =========*/
 
 .usermanager.transaction tr:not(.th):nth-child(odd){

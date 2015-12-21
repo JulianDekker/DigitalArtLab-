@@ -113,7 +113,7 @@ class __TwigTemplate_5b5b88b660629a3c0cff3be4b55bb34ead59f57369671b7891ad5e5b87f
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["user"]) ? $context["user"] : null), "username", array()), "html", null, true);
             echo "\" disabled=\"disabled\" />
                 <label>Hoeveelheid: </label><input type=\"number\">
-                <label>Reden: </label><textarea></textarea>
+                <label class=\"label100\">Reden: </label><textarea class=\"input100\"></textarea>
                 <input type=\"submit\" value=\"Bij/Afschrijven\" class=\"transactionbutton\">
             </form>
             <hr>
@@ -442,7 +442,7 @@ class __TwigTemplate_5b5b88b660629a3c0cff3be4b55bb34ead59f57369671b7891ad5e5b87f
 /*             <form class="user_transaction_form">*/
 /*                 <label>Gebruikersnaam: </label><input type="text" value="{{ user.username }}" disabled="disabled" />*/
 /*                 <label>Hoeveelheid: </label><input type="number">*/
-/*                 <label>Reden: </label><textarea></textarea>*/
+/*                 <label class="label100">Reden: </label><textarea class="input100"></textarea>*/
 /*                 <input type="submit" value="Bij/Afschrijven" class="transactionbutton">*/
 /*             </form>*/
 /*             <hr>*/
