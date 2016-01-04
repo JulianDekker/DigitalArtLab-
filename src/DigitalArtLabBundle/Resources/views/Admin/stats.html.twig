@@ -3,6 +3,16 @@
 {% block body -%}
     <div class="content-container">
         <h2 class="h2">Statistieken</h2>
+        <form class="timespanform">
+            <select>
+                <option value="1">Alltime</option>
+                <option value="2">Deze Week</option>
+                <option value="3">deze maand</option>
+                <option value="4">dit half-jaar</option>
+                <option value="5">dit jaar</option>
+                <option value="6">Handmatig</option>
+            </select>
+        </form>
         {% set totaltransactionup = 0 %}
         {% set totaltransactiondown = 0 %}
         {% for transaction in transactions %}
@@ -60,6 +70,56 @@
         <div class="clear"></div>
     </div>
     <script type="text/javascript">
+
+        $(document).ready(function(){
+            $('.timespanform').change(function() {
+                var time = parseInt($( ".timespanform option:selected" ).val());
+
+                var time1 = '0000-01-01';
+                switch(time) {
+                    case 1:
+                        time1 = '0000-01-01';
+                        break;
+                    case 2:
+                        time1 = '{{ "now"|date_modify('-7 day')|date("Y-m-d") }}';
+                        break;
+                    case 3:
+                        time1 = '{{ "now"|date_modify('-1 month')|date("Y-m-d") }}';
+                        break;
+                    case 4:
+                        time1 = '{{ "now"|date_modify('-6 month')|date("Y-m-d") }}';
+                        break;
+                    case 5:
+                        time1 = '{{ "now"|date_modify('-1 year')|date("Y-m-d") }}';
+                        break;
+                    case 6:
+                        time1 = '{{ "now"|date_modify('-7 day')|date("Y-m-d") }}';
+                        break;
+                }
+                var time2 = '{{ "now"|date("Y-m-d") }}';
+                getStats(time1,time2);
+            });
+
+        });
+
+        function getStats(time1, time2){
+            console.log(time1, time2);
+            $.post(
+                    '{{path('DigitalArtLabBundle_ajax_get_stats')}}',
+                    {time1: time1, time2: time2},
+                    function(response){
+                        if(response.code == 100 && response.success){//dummy check
+                            console.log('Time1: '+response.time1+'time2: '+ response.time2);
+                        }
+                        if(response.code == 200 || response.success == false){
+                            console.log('fail')
+                        }
+
+                    }, "json");
+        }
+
+        /*charts js*/
+
         window.onload = function () {
             var chart = new CanvasJS.Chart("checkin_users", {
 

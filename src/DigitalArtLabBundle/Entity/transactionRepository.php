@@ -31,4 +31,17 @@ class transactionRepository extends \Doctrine\ORM\EntityRepository
             ->setMaxResults(10)
             ->getResult();
     }
+
+    public function groupTransactionsByTime($time1,$time2){
+
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT f, SUBSTRING(f.time, 1, 10) as date  FROM DigitalArtLabBundle:transaction f WHERE f.time BETWEEN :time1 and :time2 ORDER BY date'
+            )
+            ->setParameters(array(
+                'time1' => $time1,
+                'time2' => $time2,
+            ))
+            ->getResult();
+    }
 }

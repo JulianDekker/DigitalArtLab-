@@ -34,4 +34,17 @@ class checkinRepository extends EntityRepository
             )
             ->getResult();
     }
+
+    public function groupSessionsByTime($time1,$time2){
+
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT b, SUBSTRING(b.timein, 1, 10) as date  FROM DigitalArtLabBundle:checkin b WHERE b.timein BETWEEN :time1 and :time2 ORDER BY date'
+            )
+            ->setParameters(array(
+                'time1' => $time1,
+                'time2' => $time2,
+            ))
+            ->getResult();
+    }
 }

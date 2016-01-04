@@ -27,6 +27,11 @@ digital_art_lab:
 #    resource: "@AppBundle/Controller/"
 #    type:     annotation
 
+#ajax request path's
 DigitalArtLabBundle_ajax_create_transaction:
   pattern:  /create/new/transaction/ajax/call
   defaults: { _controller: DigitalArtLabBundle:Admin:createTransaction }
+
+DigitalArtLabBundle_ajax_get_stats:
+  pattern:  /get/data/statestieken/ajax/call
+  defaults: { _controller: DigitalArtLabBundle:Statestieken:getStats }
