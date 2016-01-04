@@ -103,13 +103,12 @@
         });
 
         function getStats(time1, time2){
-            console.log(time1, time2);
             $.post(
                     '{{path('DigitalArtLabBundle_ajax_get_stats')}}',
                     {time1: time1, time2: time2},
                     function(response){
                         if(response.code == 100 && response.success){//dummy check
-                            console.log('Time1: '+response.time1+'time2: '+ response.time2);
+                            console.log('Time1: '+response.time1+' '+'time2: '+ response.time2);
                         }
                         if(response.code == 200 || response.success == false){
                             console.log('fail')
