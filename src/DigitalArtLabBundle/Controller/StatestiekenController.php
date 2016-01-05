@@ -126,10 +126,11 @@ class StatestiekenController extends Controller
 
 
         $time = '00:00:00';
+        $avgtime = '00:00:00';
         foreach ($checkins as $checkin){
             if (!is_null($checkin->getSessionduration())){
                 $time = sum_the_time($time, date_format($checkin->getSessionduration(), 'H:i:s') );
-                
+                /*$avgtime = date_format($time / sizeof($checkin), 'H:i:s');*/
             }
         }
 
@@ -175,7 +176,7 @@ class StatestiekenController extends Controller
             array_push($totaldownarray, array($key => $totaldown));
         }
 
-        $response = array("code" => 100, "success" => true, "time1" => $time1, "time2" => $time2, "titel" => $titel, 'transactions' => $transactions, 'users' => $users, 'checkins' => $checkins, 'totaaluren' => $time, 'groupsessions' => $count, 'createdusers' => $countusers, 'grouptransactionsup' => $totaluparray, 'grouptransactionsdown' => $totaldownarray/*, 'jcheckin' => $json*/);
+        $response = array("code" => 100, "success" => true, "time1" => $time1, "time2" => $time2, "titel" => $titel, 'transactions' => $transactions, 'users' => $users, 'checkins' => $checkins, 'totaaluren' => $time, 'groupsessions' => $count, 'createdusers' => $countusers, 'grouptransactionsup' => $totaluparray, 'grouptransactionsdown' => $totaldownarray, 'avgtime' => $avgtime);
 
         //you can return result as JSON
         return new Response(json_encode($response));
