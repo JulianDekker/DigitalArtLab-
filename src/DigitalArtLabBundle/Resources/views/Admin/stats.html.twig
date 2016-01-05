@@ -152,7 +152,6 @@
                             var userdataPoints = [];
                             for (var key in response.createdusers) {
                                 var value = response.createdusers[key];
-                                console.log(key+" "+value);
 
                                 userdataPoints.push({
                                     label : key,
@@ -179,42 +178,70 @@
 
                             chart2.render();
 
+                            var transacttitle = "Transacties"+ titel;
+
+                            var transactupPoints = [];
+                            var i = 0;
+                            for (key in response.grouptransactionsup) {
+
+                                for (var key in response.grouptransactionsup[i] )  {
+                                    var value = response.grouptransactionsup[i][key];
+
+                                    transactupPoints.push({
+                                        label : key,
+                                        y : value
+                                    });
+                                }
+                                i++;
+
+                            }
+
+                            var transactdownPoints = [];
+                            var i = 0;
+                            for (key in response.grouptransactionsdown) {
+
+                                for (var key in response.grouptransactionsdown[i] )  {
+                                    var value = response.grouptransactionsdown[i][key];
+
+                                    transactdownPoints.push({
+                                        label : key,
+                                        y : value
+                                    });
+                                }
+                                i++;
+
+                            }
+
                             var chart3 = new CanvasJS.Chart("transactions_day", {
                                 title:{
-                                    text: "Transacties per dag"
+                                    text: transacttitle
                                 },
 
                                 data: [  //array of dataSeries
                                     { //dataSeries - first quarter
                                         /*** Change type "column" to "bar", "area", "line" or "pie"***/
-                                        type: "line",
+                                        type: "area",
                                         yValueFormatString:"# Opgewaardeerd",
                                         name: "Opgewaardeerd",
                                         showInLegend: true,
-                                        dataPoints: [
-                                            {% for transactions in grouptransactionsup %}
+                                        dataPoints: transactupPoints
+                                            {#{% for transactions in grouptransactionsup %}
                                             {% for key,values in transactions %}
                                             { label: "{{ key }}", y: {{ values }} },
                                             {% endfor %}
-                                            {% endfor %}
-                                        ]
+                                            {% endfor %}#}
+
                                     },
 
                                     { //dataSeries - second quarter
 
-                                        type: "line",
+                                        type: "area",
                                         yValueFormatString:"# Afgeschreven",
                                         name: "Afgeschreven",
                                         showInLegend: true,
-                                        dataPoints: [
-                                            {% for transactions in grouptransactionsdown %}
-                                            {% for key,values in transactions %}
-                                            { label: "{{ key }}", y: {{ values }} },
-                                            {% endfor %}
-                                            {% endfor %}
-                                        ]
+                                        dataPoints: transactdownPoints
                                     }
-                                ],
+                                ]
 
                             });
 
@@ -258,7 +285,7 @@
             var chart2 = new CanvasJS.Chart("created_users", {
 
                 title:{
-                    text: "Nieuwe gebruikers per dag"
+                    text: "Nieuwe gebruikers, vanaf het begin"
                 },
                 data: [//array of dataSeries
                     { //dataSeries object
@@ -279,13 +306,13 @@
 
             var chart3 = new CanvasJS.Chart("transactions_day", {
                 title:{
-                    text: "Transacties per dag"
+                    text: "Transacties, Vanaf het begin"
                 },
 
                 data: [  //array of dataSeries
                     { //dataSeries - first quarter
                         /*** Change type "column" to "bar", "area", "line" or "pie"***/
-                        type: "line",
+                        type: "area",
                         yValueFormatString:"# Opgewaardeerd",
                         name: "Opgewaardeerd",
                         showInLegend: true,
@@ -300,7 +327,7 @@
 
                     { //dataSeries - second quarter
 
-                        type: "line",
+                        type: "area",
                         yValueFormatString:"# Afgeschreven",
                         name: "Afgeschreven",
                         showInLegend: true,
