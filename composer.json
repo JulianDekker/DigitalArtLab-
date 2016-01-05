@@ -19,7 +19,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "components/jquery": "1.9.*",
         "friendsofsymfony/user-bundle": "2.0.*@dev",
-        "beberlei/DoctrineExtensions": "^1.0"
+        "beberlei/DoctrineExtensions": "^1.0",
+        "symfony/serializer": "^3.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

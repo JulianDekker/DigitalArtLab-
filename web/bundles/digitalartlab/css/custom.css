@@ -1,3 +1,4 @@
+
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic);
 
 *{
@@ -67,7 +68,7 @@ hr{
     border-radius: 9px;
 }
 
-textarea.input100{
+textarea.input100, textarea.input50{
     min-height: 150px;
 }
 
@@ -396,6 +397,11 @@ tr.actions-row td{
     color: #fff;
     border: 1px solid #2699D6;
     padding: 2px 15px;
+}
+
+.user_transaction_form textarea.input100{
+    min-height: 50px;
+    resize:vertical;
 }
 
 /*=====================Transacties =========*/

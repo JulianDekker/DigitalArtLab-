@@ -24,41 +24,41 @@
         {% endfor %}
         <div class="stat">
             <h2>Totaal opgewaardeerd</h2>
-            {{ totaltransactionup }}
+            <div class="totaltranup">{{ totaltransactionup }}</div>
             <h2>Totaal afgeschreven</h2>
-            {{ totaltransactiondown }}
+            <div class="totaltrandown">{{ totaltransactiondown }}</div>
         </div>
         <div class="stat">
             <h2>Uren totaal</h2>
-            {{ totaaluren }}
+            <div class="totalhour">{{ totaaluren }}</div>
             <h2>Gemiddelde sessieduur</h2>
-
-            {% set sumratingsH = '0' %}
-            {% set sumratingsi = '0' %}
-            {% set sumratingss = '0' %}
-            {% for checkin in checkins %}
-                {% if checkin.sessionduration %}
-                    {% set sumratingsH = sumratingsH + checkin.sessionduration|date('H') / loop.length %}
-                    {% set sumratingsi = sumratingsi + checkin.sessionduration|date('i') / loop.length %}
-                    {% set sumratingss = sumratingss + checkin.sessionduration|date('s') / loop.length %}
+            <div class="avaragesession">
+                {% set sumratingsH = '0' %}
+                {% set sumratingsi = '0' %}
+                {% set sumratingss = '0' %}
+                {% for checkin in checkins %}
+                    {% if checkin.sessionduration %}
+                        {% set sumratingsH = sumratingsH + checkin.sessionduration|date('H') / loop.length %}
+                        {% set sumratingsi = sumratingsi + checkin.sessionduration|date('i') / loop.length %}
+                        {% set sumratingss = sumratingss + checkin.sessionduration|date('s') / loop.length %}
+                    {% endif %}
+                {% endfor %}
+                {% set sumratingshl = (sumratingsH - sumratingsH|round(0, 'floor')) *60 %}
+                {% set sumratingsi = sumratingsi + sumratingshl %}
+                {%  if sumratingsi > 60 %}
+                    {% set sumratingsi = sumratingsi / 60 %}
+                    {% set sumratingsH = sumratingsH + sumratingsi|round(0, 'floor') %}
+                    {% set sumratingsi = (sumratingsi - sumratingsi|round(0, 'floor')) *60 %}
                 {% endif %}
-            {% endfor %}
-            {% set sumratingshl = (sumratingsH - sumratingsH|round(0, 'floor')) *60 %}
-            {% set sumratingsi = sumratingsi + sumratingshl %}
-            {%  if sumratingsi > 60 %}
-                {% set sumratingsi = sumratingsi / 60 %}
-                {% set sumratingsH = sumratingsH + sumratingsi|round(0, 'floor') %}
-                {% set sumratingsi = (sumratingsi - sumratingsi|round(0, 'floor')) *60 %}
-            {% endif %}
-            {% set sumratingsil = (sumratingsi - sumratingsi|round(0, 'floor')) *60 %}
-            {% set sumratingss = sumratingss + sumratingsil %}
-            {%  if sumratingss > 60 %}
-                {% set sumratingss = sumratingss / 60 %}
-                {% set sumratingsi = sumratingsi + sumratingss|round(0, 'floor') %}
-                {% set sumratingss = (sumratingss - sumratingss|round(0, 'floor')) *60 %}
-            {% endif %}
-            <p>{{  sumratingsH|round(0, 'floor') }}:{{  "%02d"|format(sumratingsi|round(0, 'floor')) }}:{{  "%02d"|format(sumratingss|round)  }}</p>
-
+                {% set sumratingsil = (sumratingsi - sumratingsi|round(0, 'floor')) *60 %}
+                {% set sumratingss = sumratingss + sumratingsil %}
+                {%  if sumratingss > 60 %}
+                    {% set sumratingss = sumratingss / 60 %}
+                    {% set sumratingsi = sumratingsi + sumratingss|round(0, 'floor') %}
+                    {% set sumratingss = (sumratingss - sumratingss|round(0, 'floor')) *60 %}
+                {% endif %}
+                <p>{{  sumratingsH|round(0, 'floor') }}:{{  "%02d"|format(sumratingsi|round(0, 'floor')) }}:{{  "%02d"|format(sumratingss|round)  }}</p>
+            </div>
 
         </div>
         <div id="checkin_users" ></div>
@@ -116,6 +116,73 @@
                             console.log('Time1: '+response.time1+' '+'time2: '+ response.time2);
                             console.log(response);
 
+                            var i = 0;
+                            var transdown = 0;
+                            for (key in response.grouptransactionsdown) {
+
+                                for (var key in response.grouptransactionsdown[i] )  {
+                                    var value = response.grouptransactionsdown[i][key];
+
+                                    transdown += -value;
+                                    $('.totaltrandown').text(transdown);
+                                }
+                                i++;
+
+                            }
+                            var i = 0;
+                            var transup = 0;
+                            for (key in response.grouptransactionsup) {
+
+                                for (var key in response.grouptransactionsup[i] )  {
+                                    var value = response.grouptransactionsup[i][key];
+
+                                    transup += value;
+                                    $('.totaltranup').text(transup);
+                                }
+                                i++;
+
+                            }
+
+                            $('.totalhour').text(response.totaaluren);
+
+
+                            {#{% set sumratingsH = '0' %}
+                            {% set sumratingsi = '0' %}
+                            {% set sumratingss = '0' %}
+                            {% for checkin in checkins %}
+                            {% if checkin.sessionduration %}
+                            {% set sumratingsH = sumratingsH + checkin.sessionduration|date('H') / loop.length %}
+                            {% set sumratingsi = sumratingsi + checkin.sessionduration|date('i') / loop.length %}
+                            {% set sumratingss = sumratingss + checkin.sessionduration|date('s') / loop.length %}
+                            {% endif %}
+                            {% endfor %}
+                            {% set sumratingshl = (sumratingsH - sumratingsH|round(0, 'floor')) *60 %}
+                            {% set sumratingsi = sumratingsi + sumratingshl %}
+                            {%  if sumratingsi > 60 %}
+                            {% set sumratingsi = sumratingsi / 60 %}
+                            {% set sumratingsH = sumratingsH + sumratingsi|round(0, 'floor') %}
+                            {% set sumratingsi = (sumratingsi - sumratingsi|round(0, 'floor')) *60 %}
+                            {% endif %}
+                            {% set sumratingsil = (sumratingsi - sumratingsi|round(0, 'floor')) *60 %}
+                            {% set sumratingss = sumratingss + sumratingsil %}
+                            {%  if sumratingss > 60 %}
+                            {% set sumratingss = sumratingss / 60 %}
+                            {% set sumratingsi = sumratingsi + sumratingss|round(0, 'floor') %}
+                            {% set sumratingss = (sumratingss - sumratingss|round(0, 'floor')) *60 %}
+                            {% endif %}
+                        <p>{{  sumratingsH|round(0, 'floor') }}:{{  "%02d"|format(sumratingsi|round(0, 'floor')) }}:{{  "%02d"|format(sumratingss|round)  }}</p>#}
+
+
+                            var sumratingsH = 0;
+                            var sumratingsi = 0;
+                            var sumratingss = 0;
+
+                            for (var checkin in response.checkins){
+                                console.log(response.checkins.getsessionduration)
+                            }
+
+
+
                             var dataPoints = [];
                             for (var key in response.groupsessions) {
                                 var value = response.groupsessions[key];
@@ -137,8 +204,8 @@
                                 data: [//array of dataSeries
                                     { //dataSeries object
 
-                                        /*** Change type "column" to "bar", "area", "line" or "pie"***/
-                                        type: "line",
+                                        /*** Change type "column" to "column", "area", "line" or "pie"***/
+                                        type: "column",
                                         yValueFormatString:"# Sessie('s)",
                                         dataPoints: dataPoints
                                     }
@@ -168,8 +235,8 @@
                                 data: [//array of dataSeries
                                     { //dataSeries object
 
-                                        /*** Change type "column" to "bar", "area", "line" or "pie"***/
-                                        type: "line",
+                                        /*** Change type "column" to "column", "area", "line" or "pie"***/
+                                        type: "column",
                                         yValueFormatString:"# Nieuwe gebruiker('s)",
                                         dataPoints: userdataPoints
                                     }
@@ -219,8 +286,8 @@
 
                                 data: [  //array of dataSeries
                                     { //dataSeries - first quarter
-                                        /*** Change type "column" to "bar", "area", "line" or "pie"***/
-                                        type: "area",
+                                        /*** Change type "column" to "column", "area", "line" or "pie"***/
+                                        type: "column",
                                         yValueFormatString:"# Opgewaardeerd",
                                         name: "Opgewaardeerd",
                                         showInLegend: true,
@@ -235,7 +302,7 @@
 
                                     { //dataSeries - second quarter
 
-                                        type: "area",
+                                        type: "column",
                                         yValueFormatString:"# Afgeschreven",
                                         name: "Afgeschreven",
                                         showInLegend: true,
@@ -250,7 +317,7 @@
 
                         }
                         if(response.code == 200 || response.success == false){
-                            console.log('fail')
+                            console.log('connection failed.')
                         }
 
                     }, "json");
@@ -272,8 +339,8 @@
                 data: [//array of dataSeries
                     { //dataSeries object
 
-                        /*** Change type "column" to "bar", "area", "line" or "pie"***/
-                        type: "line",
+                        /*** Change type "column" to "column", "area", "line" or "pie"***/
+                        type: "column",
                         yValueFormatString:"# Sessie('s)",
                         dataPoints: dataPoints,
                     }
@@ -290,8 +357,8 @@
                 data: [//array of dataSeries
                     { //dataSeries object
 
-                        /*** Change type "column" to "bar", "area", "line" or "pie"***/
-                        type: "line",
+                        /*** Change type "column" to "column", "area", "line" or "pie"***/
+                        type: "column",
                         yValueFormatString:"# Nieuwe gebruiker('s)",
                         dataPoints: [
                             {% for key,users in createdusers %}
@@ -311,8 +378,8 @@
 
                 data: [  //array of dataSeries
                     { //dataSeries - first quarter
-                        /*** Change type "column" to "bar", "area", "line" or "pie"***/
-                        type: "area",
+                        /*** Change type "column" to "column", "area", "line" or "pie"***/
+                        type: "column",
                         yValueFormatString:"# Opgewaardeerd",
                         name: "Opgewaardeerd",
                         showInLegend: true,
@@ -327,7 +394,7 @@
 
                     { //dataSeries - second quarter
 
-                        type: "area",
+                        type: "column",
                         yValueFormatString:"# Afgeschreven",
                         name: "Afgeschreven",
                         showInLegend: true,

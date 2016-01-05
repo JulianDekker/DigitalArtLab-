@@ -11,6 +11,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 /**
  * admin controller.
@@ -106,6 +110,11 @@ class StatestiekenController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
+        $encoders = array(new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer());
+
+        $serializer = new Serializer($normalizers, $encoders);
+
 
         $time1= $request->request->get('time1');
         $time2= $request->request->get('time2');
@@ -113,12 +122,14 @@ class StatestiekenController extends Controller
 
         $transactions = $em->getRepository('DigitalArtLabBundle:transaction')->findBy([], ['time' => 'DESC']);
         $users = $em->getRepository('DigitalArtLabBundle:User')->findAll();
-        $checkins = $em->getRepository('DigitalArtLabBundle:checkin')->findBy([], ['timein' => 'DESC']);
+        $checkins = $em->getRepository('DigitalArtLabBundle:checkin')->getSessionsByTime($time1, $time2);
+
 
         $time = '00:00:00';
         foreach ($checkins as $checkin){
             if (!is_null($checkin->getSessionduration())){
                 $time = sum_the_time($time, date_format($checkin->getSessionduration(), 'H:i:s') );
+                
             }
         }
 
@@ -164,7 +175,7 @@ class StatestiekenController extends Controller
             array_push($totaldownarray, array($key => $totaldown));
         }
 
-        $response = array("code" => 100, "success" => true, "time1" => $time1, "time2" => $time2, "titel" => $titel, 'transactions' => $transactions, 'users' => $users, 'checkins' => $checkins, 'totaaluren' => $time, 'groupsessions' => $count, 'createdusers' => $countusers, 'grouptransactionsup' => $totaluparray, 'grouptransactionsdown' => $totaldownarray);
+        $response = array("code" => 100, "success" => true, "time1" => $time1, "time2" => $time2, "titel" => $titel, 'transactions' => $transactions, 'users' => $users, 'checkins' => $checkins, 'totaaluren' => $time, 'groupsessions' => $count, 'createdusers' => $countusers, 'grouptransactionsup' => $totaluparray, 'grouptransactionsdown' => $totaldownarray/*, 'jcheckin' => $json*/);
 
         //you can return result as JSON
         return new Response(json_encode($response));
