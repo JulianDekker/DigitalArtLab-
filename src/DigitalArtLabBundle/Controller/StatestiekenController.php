@@ -110,7 +110,7 @@ class StatestiekenController extends Controller
         $time1= $request->request->get('time1');
         $time2= $request->request->get('time2');
 
-        /*$transactions = $em->getRepository('DigitalArtLabBundle:transaction')->findBy([], ['time' => 'DESC']);
+        $transactions = $em->getRepository('DigitalArtLabBundle:transaction')->findBy([], ['time' => 'DESC']);
         $users = $em->getRepository('DigitalArtLabBundle:User')->findAll();
         $checkins = $em->getRepository('DigitalArtLabBundle:checkin')->findBy([], ['timein' => 'DESC']);
 
@@ -161,9 +161,9 @@ class StatestiekenController extends Controller
             }
             array_push($totaluparray, array($key => $totalup));
             array_push($totaldownarray, array($key => $totaldown));
-        }*/
+        }
 
-        $response = array("code" => 100, "success" => true, "time1" => $time1, "time2" => $time2);
+        $response = array("code" => 100, "success" => true, "time1" => $time1, "time2" => $time2, 'transactions' => $transactions, 'users' => $users, 'checkins' => $checkins, 'totaaluren' => $time, 'groupsessions' => $count, 'createdusers' => $countusers, 'grouptransactionsup' => $totaluparray, 'grouptransactionsdown' => $totaldownarray);
 
         //you can return result as JSON
         return new Response(json_encode($response));

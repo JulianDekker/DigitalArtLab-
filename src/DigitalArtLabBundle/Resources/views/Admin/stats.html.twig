@@ -108,7 +108,40 @@
                     {time1: time1, time2: time2},
                     function(response){
                         if(response.code == 100 && response.success){//dummy check
-                            console.log('Time1: '+response.time1+' '+'time2: '+ response.time2);
+                            console.log('Time1: '+response.time1+' t '+'time2: '+ response.time2);
+                            console.log(response);
+
+                            var dataPoints = [{}];
+                            for (var key in response.groupsessions) {
+                                var value = response.groupsessions[key];
+                                console.log(key+" "+value);
+
+                                dataPoints.push({
+                                    label : key,
+                                    y : value
+                                });
+
+                                console.log(dataPoints);
+
+                            }
+                            var chart = new CanvasJS.Chart("checkin_users", {
+
+                                title:{
+                                    text: "Aanmeldingen per dag"
+                                },
+                                data: [//array of dataSeries
+                                    { //dataSeries object
+
+                                        /*** Change type "column" to "bar", "area", "line" or "pie"***/
+                                        type: "line",
+                                        yValueFormatString:"# Sessie('s)",
+                                        dataPoints: dataPoints,
+                                    }
+                                ]
+                            });
+
+                            chart.render();
+
                         }
                         if(response.code == 200 || response.success == false){
                             console.log('fail')
@@ -120,6 +153,11 @@
         /*charts js*/
 
         window.onload = function () {
+            var dataPoints = [
+                {% for key,sessions in groupsessions %}
+                { label: "{{ key }}", y: {{ sessions }} },
+                {% endfor %}
+            ]
             var chart = new CanvasJS.Chart("checkin_users", {
 
                 title:{
@@ -131,11 +169,7 @@
                         /*** Change type "column" to "bar", "area", "line" or "pie"***/
                         type: "line",
                         yValueFormatString:"# Sessie('s)",
-                        dataPoints: [
-                            {% for key,sessions in groupsessions %}
-                            { label: "{{ key }}", y: {{ sessions }} },
-                            {% endfor %}
-                        ]
+                        dataPoints: dataPoints,
                     }
                 ]
             });
