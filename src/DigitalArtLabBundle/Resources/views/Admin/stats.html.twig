@@ -74,41 +74,46 @@
         $(document).ready(function(){
             $('.timespanform').change(function() {
                 var time = parseInt($( ".timespanform option:selected" ).val());
-
                 var time1 = '0000-01-01';
+                var titel = '';
                 switch(time) {
                     case 1:
                         time1 = '0000-01-01';
+                        titel = ', vanaf het begin';
                         break;
                     case 2:
                         time1 = '{{ "now"|date_modify('-7 day')|date("Y-m-d") }}';
+                        titel = ', een week terug';
                         break;
                     case 3:
                         time1 = '{{ "now"|date_modify('-1 month')|date("Y-m-d") }}';
+                        titel = ', een maand terug';
                         break;
                     case 4:
                         time1 = '{{ "now"|date_modify('-6 month')|date("Y-m-d") }}';
+                        titel = ', 6 maanden terug';
                         break;
                     case 5:
                         time1 = '{{ "now"|date_modify('-1 year')|date("Y-m-d") }}';
+                        titel = ', 1 jaar terug';
                         break;
                     case 6:
                         time1 = '{{ "now"|date_modify('-7 day')|date("Y-m-d") }}';
                         break;
                 }
-                var time2 = '{{ "now"|date("Y-m-d") }}';
-                getStats(time1,time2);
+                var time2 = '{{ "now"|date_modify('+1 day')|date("Y-m-d") }}';
+                getStats(time1,time2, titel);
             });
 
         });
 
-        function getStats(time1, time2){
+        function getStats(time1, time2, titel){
             $.post(
                     '{{path('DigitalArtLabBundle_ajax_get_stats')}}',
-                    {time1: time1, time2: time2},
+                    {time1: time1, time2: time2, titel: titel},
                     function(response){
                         if(response.code == 100 && response.success){//dummy check
-                            console.log('Time1: '+response.time1+' t '+'time2: '+ response.time2);
+                            console.log('Time1: '+response.time1+' '+'time2: '+ response.time2);
                             console.log(response);
 
                             var dataPoints = [];
@@ -124,10 +129,12 @@
                                 console.log(dataPoints);
 
                             }
+                            var titel = response.titel;
+                            var aanmeldingtitel = "aantal aanmeldingen"+ titel;
                             var chart = new CanvasJS.Chart("checkin_users", {
 
                                 title:{
-                                    text: "Aanmeldingen per dag"
+                                    text: aanmeldingtitel
                                 },
                                 data: [//array of dataSeries
                                     { //dataSeries object
@@ -161,7 +168,7 @@
             var chart = new CanvasJS.Chart("checkin_users", {
 
                 title:{
-                    text: "Aanmeldingen per dag"
+                    text: "Aanmeldingen, vanaf het begin"
                 },
                 data: [//array of dataSeries
                     { //dataSeries object
