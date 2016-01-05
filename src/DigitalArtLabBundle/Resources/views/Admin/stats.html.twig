@@ -119,17 +119,15 @@
                             var dataPoints = [];
                             for (var key in response.groupsessions) {
                                 var value = response.groupsessions[key];
-                                console.log(key+" "+value);
 
                                 dataPoints.push({
                                     label : key,
                                     y : value
                                 });
 
-                                console.log(dataPoints);
-
                             }
                             var titel = response.titel;
+
                             var aanmeldingtitel = "aantal aanmeldingen"+ titel;
                             var chart = new CanvasJS.Chart("checkin_users", {
 
@@ -142,12 +140,86 @@
                                         /*** Change type "column" to "bar", "area", "line" or "pie"***/
                                         type: "line",
                                         yValueFormatString:"# Sessie('s)",
-                                        dataPoints: dataPoints,
+                                        dataPoints: dataPoints
                                     }
                                 ]
                             });
 
                             chart.render();
+
+                            var usertitle = "Nieuwe gebruikers"+ titel;
+
+                            var userdataPoints = [];
+                            for (var key in response.createdusers) {
+                                var value = response.createdusers[key];
+                                console.log(key+" "+value);
+
+                                userdataPoints.push({
+                                    label : key,
+                                    y : value
+                                });
+
+                            }
+
+                            var chart2 = new CanvasJS.Chart("created_users", {
+
+                                title:{
+                                    text: usertitle
+                                },
+                                data: [//array of dataSeries
+                                    { //dataSeries object
+
+                                        /*** Change type "column" to "bar", "area", "line" or "pie"***/
+                                        type: "line",
+                                        yValueFormatString:"# Nieuwe gebruiker('s)",
+                                        dataPoints: userdataPoints
+                                    }
+                                ]
+                            });
+
+                            chart2.render();
+
+                            var chart3 = new CanvasJS.Chart("transactions_day", {
+                                title:{
+                                    text: "Transacties per dag"
+                                },
+
+                                data: [  //array of dataSeries
+                                    { //dataSeries - first quarter
+                                        /*** Change type "column" to "bar", "area", "line" or "pie"***/
+                                        type: "line",
+                                        yValueFormatString:"# Opgewaardeerd",
+                                        name: "Opgewaardeerd",
+                                        showInLegend: true,
+                                        dataPoints: [
+                                            {% for transactions in grouptransactionsup %}
+                                            {% for key,values in transactions %}
+                                            { label: "{{ key }}", y: {{ values }} },
+                                            {% endfor %}
+                                            {% endfor %}
+                                        ]
+                                    },
+
+                                    { //dataSeries - second quarter
+
+                                        type: "line",
+                                        yValueFormatString:"# Afgeschreven",
+                                        name: "Afgeschreven",
+                                        showInLegend: true,
+                                        dataPoints: [
+                                            {% for transactions in grouptransactionsdown %}
+                                            {% for key,values in transactions %}
+                                            { label: "{{ key }}", y: {{ values }} },
+                                            {% endfor %}
+                                            {% endfor %}
+                                        ]
+                                    }
+                                ],
+
+                            });
+
+                            chart3.render();
+
 
                         }
                         if(response.code == 200 || response.success == false){
