@@ -130,7 +130,17 @@ class StatestiekenController extends Controller
         foreach ($checkins as $checkin){
             if (!is_null($checkin->getSessionduration())){
                 $time = sum_the_time($time, date_format($checkin->getSessionduration(), 'H:i:s') );
-                /*$avgtime = date_format($time / sizeof($checkin), 'H:i:s');*/
+
+                $time_divide = explode(':', $time);
+                $hours = (int)$time_divide[0];
+                $minutes = (int)$time_divide[1];
+                $seconds = (int)$time_divide[2];
+
+                $total_seconds = ($hours * 3600) + ($minutes * 60) + $seconds;
+
+                $avgseconds = floor($total_seconds / sizeof($checkins));
+                $avgtime = gmdate('H:i:s', $avgseconds);
+
             }
         }
 

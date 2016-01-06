@@ -323,6 +323,11 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
             return array (  '_controller' => 'DigitalArtLabBundle\\Controller\\AdminController::createTransactionAction',  '_route' => 'DigitalArtLabBundle_ajax_create_transaction',);
         }
 
+        // DigitalArtLabBundle_ajax_get_stats
+        if ($pathinfo === '/get/data/statestieken/ajax/call') {
+            return array (  '_controller' => 'DigitalArtLabBundle\\Controller\\StatestiekenController::getStatsAction',  '_route' => 'DigitalArtLabBundle_ajax_get_stats',);
+        }
+
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
     }
 }

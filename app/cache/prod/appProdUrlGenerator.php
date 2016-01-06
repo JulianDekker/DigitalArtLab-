@@ -12,7 +12,17 @@ use Psr\Log\LoggerInterface;
  */
 class appProdUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerator
 {
-    private static $declaredRoutes = array(
+    private static $declaredRoutes;
+
+    /**
+     * Constructor.
+     */
+    public function __construct(RequestContext $context, LoggerInterface $logger = null)
+    {
+        $this->context = $context;
+        $this->logger = $logger;
+        if (null === self::$declaredRoutes) {
+            self::$declaredRoutes = array(
         'fos_user_security_login' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'FOS\\UserBundle\\Controller\\SecurityController::loginAction',  ),  2 =>   array (    '_method' => 'GET|POST',  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/login',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
         'fos_user_security_check' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'FOS\\UserBundle\\Controller\\SecurityController::checkAction',  ),  2 =>   array (    '_method' => 'POST',  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/login_check',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
         'fos_user_security_logout' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'FOS\\UserBundle\\Controller\\SecurityController::logoutAction',  ),  2 =>   array (    '_method' => 'GET',  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/logout',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
@@ -40,15 +50,9 @@ class appProdUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerat
         'admin_transaction_create' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'DigitalArtLabBundle\\Controller\\transactionController::createAction',  ),  2 =>   array (    '_method' => 'POST',  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/admin/transaction/',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
         'admin_transaction_new' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'DigitalArtLabBundle\\Controller\\transactionController::newAction',  ),  2 =>   array (    '_method' => 'GET',  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/admin/transaction/new',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
         'DigitalArtLabBundle_ajax_create_transaction' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'DigitalArtLabBundle\\Controller\\AdminController::createTransactionAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/create/new/transaction/ajax/call',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
+        'DigitalArtLabBundle_ajax_get_stats' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'DigitalArtLabBundle\\Controller\\StatestiekenController::getStatsAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/get/data/statestieken/ajax/call',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
     );
-
-    /**
-     * Constructor.
-     */
-    public function __construct(RequestContext $context, LoggerInterface $logger = null)
-    {
-        $this->context = $context;
-        $this->logger = $logger;
+        }
     }
 
     public function generate($name, $parameters = array(), $referenceType = self::ABSOLUTE_PATH)
