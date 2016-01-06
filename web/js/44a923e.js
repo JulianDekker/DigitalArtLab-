@@ -11963,6 +11963,18 @@ $(document).ready(function(){
         });
     });
 
+    $('#time1').datepicker({
+        maxDate: new Date(), // Now can select only dates, which goes after today
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'yy-mm-dd'
+    });
+    $('#time2').datepicker({
+        maxDate: new Date(), // Now can select only dates, which goes after today
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'yy-mm-dd'
+    });
 
     var viewheight = $(document).height();
     var containerheight = viewheight - 141 - 150;
