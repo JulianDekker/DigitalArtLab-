@@ -5,6 +5,9 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             {% stylesheets filter="cssrewrite"
+            '@DigitalArtLabBundle/Resources/public/css/jquery-ui.min.css'
+            '@DigitalArtLabBundle/Resources/public/css/jquery-ui.structure.min.css'
+            '@DigitalArtLabBundle/Resources/public/css/jquery-ui.theme.min.css'
             '@DigitalArtLabBundle/Resources/public/css/custom.css'
             %}
             <link rel="stylesheet" href="{{ asset_url }}" />
@@ -15,6 +18,7 @@
             {% javascripts
             '%kernel.root_dir%/../vendor/components/jquery/jquery.js'
             '@DigitalArtLabBundle/Resources/public/js/jquery.qrcode.js'
+            '@DigitalArtLabBundle/Resources/public/js/jquery-ui.min.js'
             '@DigitalArtLabBundle/Resources/public/js/jquery.canvasjs.min.js'
             '@DigitalArtLabBundle/Resources/public/js/custom.js'
             %}

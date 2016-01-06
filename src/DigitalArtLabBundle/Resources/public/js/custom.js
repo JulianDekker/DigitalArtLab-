@@ -4,7 +4,7 @@
 $(document).ready(function(){
 
     $('.qrcode').each(function() {
-        var qrcode = $(this).attr('value')
+        var qrcode = $(this).attr('value');
         console.log(qrcode);
         $(this).qrcode({
             "size": 95,
@@ -13,6 +13,18 @@ $(document).ready(function(){
         });
     });
 
+    $('#time1').datepicker({
+        maxDate: new Date(), // Now can select only dates, which goes after today
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'yy-mm-dd'
+    });
+    $('#time2').datepicker({
+        maxDate: new Date(), // Now can select only dates, which goes after today
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'yy-mm-dd'
+    });
 
     var viewheight = $(document).height();
     var containerheight = viewheight - 141 - 150;

@@ -4,7 +4,7 @@
 $(document).ready(function(){
 
     $('.qrcode').each(function() {
-        var qrcode = $(this).attr('value')
+        var qrcode = $(this).attr('value');
         console.log(qrcode);
         $(this).qrcode({
             "size": 95,

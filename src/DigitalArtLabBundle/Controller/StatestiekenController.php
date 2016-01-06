@@ -120,6 +120,10 @@ class StatestiekenController extends Controller
         $time2= $request->request->get('time2');
         $titel= $request->request->get('titel');
 
+        $time2 = new \DateTime($time2);
+        $time2->modify('+1 day');
+        $time2->format('Y-m-d');
+
         $transactions = $em->getRepository('DigitalArtLabBundle:transaction')->findBy([], ['time' => 'DESC']);
         $users = $em->getRepository('DigitalArtLabBundle:User')->findAll();
         $checkins = $em->getRepository('DigitalArtLabBundle:checkin')->getSessionsByTime($time1, $time2);

@@ -35,6 +35,8 @@ h2.h2{
     box-sizing: border-box;
 }
 
+.h2small{font-size: 60%;}
+
 a{
     color: #2699D6;
 }

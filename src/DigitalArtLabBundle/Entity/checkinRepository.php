@@ -39,7 +39,7 @@ class checkinRepository extends EntityRepository
 
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT b, SUBSTRING(b.timein, 1, 10) as date  FROM DigitalArtLabBundle:checkin b WHERE b.timein BETWEEN :time1 and :time2 ORDER BY date'
+                'SELECT b, SUBSTRING(b.timein, 1, 10) as date  FROM DigitalArtLabBundle:checkin b WHERE b.timein >= :time1 and b.timein <= :time2 ORDER BY date'
             )
             ->setParameters(array(
                 'time1' => $time1,
@@ -52,7 +52,7 @@ class checkinRepository extends EntityRepository
 
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT r FROM DigitalArtLabBundle:checkin r WHERE r.timein BETWEEN :time1 and :time2 ORDER BY r.timein ASC'
+                'SELECT r FROM DigitalArtLabBundle:checkin r WHERE r.timein >= :time1 and r.timein <= :time2 ORDER BY r.timein ASC'
             )
             ->setParameters(array(
                 'time1' => $time1,

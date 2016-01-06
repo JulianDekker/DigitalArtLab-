@@ -2,16 +2,21 @@
 
 {% block body -%}
     <div class="content-container">
-        <h2 class="h2">Statistieken</h2>
+        <h2 class="h2">Statistieken <span class="h2small">- Alles</span></h2>
         <form class="timespanform">
             <select>
-                <option value="1">Alltime</option>
-                <option value="2">Deze Week</option>
-                <option value="3">deze maand</option>
-                <option value="4">dit half-jaar</option>
-                <option value="5">dit jaar</option>
-                <option value="6">Handmatig</option>
+                <option value="1">Alles</option>
+                <option value="2">Een week</option>
+                <option value="3">Een maand</option>
+                <option value="4">Een half-jaar</option>
+                <option value="5">Een jaar</option>
+                <option value="6">Aangepast</option>
             </select>
+            <div class="datepicker-container" style="display: none;">
+                <p>Kies een tijdsperiode</p>
+                <input type='text' class="datepicker" id="time1" data-position="right top" /> -
+                <input type='text' class="datepicker" id="time2" data-position="right top" />
+            </div>
         </form>
         {% set totaltransactionup = 0 %}
         {% set totaltransactiondown = 0 %}
@@ -72,37 +77,66 @@
     <script type="text/javascript">
 
         $(document).ready(function(){
-            $('.timespanform').change(function() {
+
+            $('.timespanform select').change(function() {
                 var time = parseInt($( ".timespanform option:selected" ).val());
                 var time1 = '0000-01-01';
+                var time2 = '{{ "now"|date_modify('+1 day')|date("Y-m-d") }}';
                 var titel = '';
                 switch(time) {
                     case 1:
+                        if($('.datepicker-container').hasClass('open')){
+                            $('.datepicker-container').slideToggle(300).removeClass('open');
+                        }
                         time1 = '0000-01-01';
-                        titel = ', vanaf het begin';
+                        titel = ' - alles';
+                        getStats(time1,time2, titel);
                         break;
                     case 2:
+                        if($('.datepicker-container').hasClass('open')){
+                            $('.datepicker-container').slideToggle(300).removeClass('open');
+                        }
                         time1 = '{{ "now"|date_modify('-7 day')|date("Y-m-d") }}';
-                        titel = ', een week terug';
+                        titel = '- een week terug';
+                        getStats(time1,time2, titel);
                         break;
                     case 3:
+                        if($('.datepicker-container').hasClass('open')){
+                            $('.datepicker-container').slideToggle(300).removeClass('open');
+                        }
                         time1 = '{{ "now"|date_modify('-1 month')|date("Y-m-d") }}';
-                        titel = ', een maand terug';
+                        titel = '- een maand terug';
+                        getStats(time1,time2, titel);
                         break;
                     case 4:
+                        if($('.datepicker-container').hasClass('open')){
+                            $('.datepicker-container').slideToggle(300).removeClass('open');
+                        }
                         time1 = '{{ "now"|date_modify('-6 month')|date("Y-m-d") }}';
-                        titel = ', 6 maanden terug';
+                        titel = '- 6 maanden terug';
+                        getStats(time1,time2, titel);
                         break;
                     case 5:
+                        if($('.datepicker-container').hasClass('open')){
+                            $('.datepicker-container').slideToggle(300).removeClass('open');
+                        }
                         time1 = '{{ "now"|date_modify('-1 year')|date("Y-m-d") }}';
-                        titel = ', 1 jaar terug';
+                        titel = '- 1 jaar terug';
+                        getStats(time1,time2, titel);
                         break;
                     case 6:
-                        time1 = '{{ "now"|date_modify('-7 day')|date("Y-m-d") }}';
+                        $('.datepicker-container').slideToggle(300).addClass('open');
+                        titel = "- Aangepast";
+                        $('.datepicker').change(function() {
+                           time1 = $('#time1').val();
+                           time2 = $('#time2').val();
+                           titel = '- ' + time1 + '/' + time2;
+                            if (time1  && time2){
+                                getStats(time1,time2, titel);
+                            }
+                        });
                         break;
                 }
-                var time2 = '{{ "now"|date_modify('+1 day')|date("Y-m-d") }}';
-                getStats(time1,time2, titel);
             });
 
         });
@@ -145,6 +179,7 @@
 
                             $('.totalhour').text(response.totaaluren);
                             $('.avaragesession').text(response.avgtime);
+                            $('h2.h2 .h2small').text(response.titel);
 
 
                             {#{% set sumratingsH = '0' %}
@@ -190,7 +225,7 @@
                             }
                             var titel = response.titel;
 
-                            var aanmeldingtitel = "aantal aanmeldingen"+ titel;
+                            var aanmeldingtitel = "Aantal sessies";
                             var chart = new CanvasJS.Chart("checkin_users", {
 
                                 title:{
@@ -209,7 +244,7 @@
 
                             chart.render();
 
-                            var usertitle = "Nieuwe gebruikers"+ titel;
+                            var usertitle = "Nieuwe gebruikers";
 
                             var userdataPoints = [];
                             for (var key in response.createdusers) {
@@ -240,7 +275,7 @@
 
                             chart2.render();
 
-                            var transacttitle = "Transacties"+ titel;
+                            var transacttitle = "Aantal transacties";
 
                             var transactupPoints = [];
                             var i = 0;
@@ -329,7 +364,7 @@
             var chart = new CanvasJS.Chart("checkin_users", {
 
                 title:{
-                    text: "Aanmeldingen, vanaf het begin"
+                    text: "Aantal sessies"
                 },
                 data: [//array of dataSeries
                     { //dataSeries object
@@ -347,7 +382,7 @@
             var chart2 = new CanvasJS.Chart("created_users", {
 
                 title:{
-                    text: "Nieuwe gebruikers, vanaf het begin"
+                    text: "Nieuwe gebruikers"
                 },
                 data: [//array of dataSeries
                     { //dataSeries object
@@ -368,7 +403,7 @@
 
             var chart3 = new CanvasJS.Chart("transactions_day", {
                 title:{
-                    text: "Transacties, Vanaf het begin"
+                    text: "Aantal transacties"
                 },
 
                 data: [  //array of dataSeries
