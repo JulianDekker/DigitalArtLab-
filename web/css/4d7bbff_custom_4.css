@@ -152,6 +152,12 @@ tr.th th{
     background: #66dd66;
 }
 
+.haserror{
+    background: #CA4040;
+    border: 1px solid red;
+    color: #fff;
+}
+
 ul li{
     list-style-type: none;
 }
@@ -433,7 +439,7 @@ tr.actions-row td{
     float: left;
     margin-bottom: 50px;
     text-align: center;
-    padding-bottom: 50px;
+    padding-bottom: 25px;
     border-bottom: 1px solid #DCDCDC;
 }
 
@@ -457,6 +463,39 @@ tr.actions-row td{
 
 .side-content.stats .error, .side-content.stats .succes{
      margin-top:0px;
+}
+
+.timespanform select, .timespanform .datepicker-container input{
+    width: 100%;
+    max-width: 300px;
+    padding: 10px 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    float: left;
+}
+
+.timespanform{
+    padding-bottom: 25px;
+    border-bottom: 1px solid #DCDCDC;
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.timespanform .datepicker{
+    float: left;
+    box-sizing: border-box;
+}
+
+.timespanform .datepicker-container p{
+    float: left;
+    vertical-align: middle;
+    padding: 8px 16px;
+}
+
+.timespanform .datepicker-container input{
+    max-width: 175px;
+    text-align: center;
 }
 
 /*=================== Homepage ================*/

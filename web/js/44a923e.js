@@ -11967,13 +11967,13 @@ $(document).ready(function(){
         maxDate: new Date(), // Now can select only dates, which goes after today
         changeMonth: true,
         changeYear: true,
-        dateFormat: 'yy-mm-dd'
+        dateFormat: 'dd-mm-yy'
     });
     $('#time2').datepicker({
         maxDate: new Date(), // Now can select only dates, which goes after today
         changeMonth: true,
         changeYear: true,
-        dateFormat: 'yy-mm-dd'
+        dateFormat: 'dd-mm-yy'
     });
 
     var viewheight = $(document).height();
