@@ -2,4 +2,4 @@ _assetic:
     resource: .
     type: assetic
 _app:
-    resource: 'F:\xampp\htdocs\DigitalArtLab\app/config/routing_dev.yml'
+    resource: 'C:\xampp\htdocs\DigitalArtLab\app/config/routing_dev.yml'

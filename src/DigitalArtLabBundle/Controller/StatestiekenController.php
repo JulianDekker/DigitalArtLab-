@@ -48,14 +48,18 @@ class StatestiekenController extends Controller
         $groupsessions = $em->getRepository('DigitalArtLabBundle:checkin')->groupSessions();
         $newsession = array();
         foreach ($groupsessions as $session){
-            array_push($newsession, $session['date']);
+            $dateformat = new \DateTime($session['date']);
+            $resultdate = $dateformat->format('d-m-Y');
+            array_push($newsession, $resultdate);
         }
         $count = array_count_values($newsession);
 
         $groupusers = $em->getRepository('DigitalArtLabBundle:User')->groupUsers();
         $newusers = array();
         foreach ($groupusers as $user){
-            array_push($newusers, $user['date']);
+            $dateformat = new \DateTime($user['date']);
+            $resultdate = $dateformat->format('d-m-Y');
+            array_push($newusers, $resultdate);
         }
         $countusers = array_count_values($newusers);
 
@@ -64,7 +68,9 @@ class StatestiekenController extends Controller
 
         $transactiondates = array();
         foreach ($grouptransactions as $transaction){
-            array_push($transactiondates, $transaction['date']);
+            $dateformat = new \DateTime($transaction['date']);
+            $resultdate = $dateformat->format('d-m-Y');
+            array_push($transactiondates, $resultdate);
         }
         $counttransactions = array_count_values( $transactiondates);
         $totaluparray = array();
@@ -73,7 +79,9 @@ class StatestiekenController extends Controller
             $totalup = 0;
             $totaldown = 0;
             foreach ($grouptransactions as $transaction){
-                if ($key == $transaction['date']){
+                $convertdate = new \DateTime($transaction['date']);
+                $transactionkey = $convertdate->format('d-m-Y');
+                if ($key ==  $transactionkey){
                     if ($transaction[0]->getAmount() > 0){
                         $totalup += $transaction[0]->getAmount();
                     }
@@ -120,6 +128,8 @@ class StatestiekenController extends Controller
         $time2= $request->request->get('time2');
         $titel= $request->request->get('titel');
 
+        $time1 = new \DateTime($time1);
+        $time1->format('Y-m-d');
         $time2 = new \DateTime($time2);
         $time2->modify('+1 day');
         $time2->format('Y-m-d');
@@ -151,14 +161,18 @@ class StatestiekenController extends Controller
         $groupsessions = $em->getRepository('DigitalArtLabBundle:checkin')->groupSessionsByTime($time1, $time2);
         $newsession = array();
         foreach ($groupsessions as $session){
-            array_push($newsession, $session['date']);
+            $dateformat = new \DateTime($session['date']);
+            $resultdate = $dateformat->format('d-m-Y');
+            array_push($newsession, $resultdate);
         }
         $count = array_count_values($newsession);
 
         $groupusers = $em->getRepository('DigitalArtLabBundle:User')->groupUsersByTime($time1, $time2);
         $newusers = array();
         foreach ($groupusers as $user){
-            array_push($newusers, $user['date']);
+            $dateformat = new \DateTime($user['date']);
+            $resultdate = $dateformat->format('d-m-Y');
+            array_push($newusers, $resultdate);
         }
         $countusers = array_count_values($newusers);
 
@@ -167,7 +181,10 @@ class StatestiekenController extends Controller
 
         $transactiondates = array();
         foreach ($grouptransactions as $transaction){
-            array_push($transactiondates, $transaction['date']);
+            $dateformat = new \DateTime($transaction['date']);
+            $resultdate = $dateformat->format('d-m-Y');
+            /*array_push($transactiondates, $transaction['date']);*/
+            array_push($transactiondates, $resultdate);
         }
         $counttransactions = array_count_values( $transactiondates);
         $totaluparray = array();
@@ -176,7 +193,9 @@ class StatestiekenController extends Controller
             $totalup = 0;
             $totaldown = 0;
             foreach ($grouptransactions as $transaction){
-                if ($key == $transaction['date']){
+                $convertdate = new \DateTime($transaction['date']);
+                $transactionkey = $convertdate->format('d-m-Y');
+                if ($key ==  $transactionkey){
                     if ($transaction[0]->getAmount() > 0){
                         $totalup += $transaction[0]->getAmount();
                     }

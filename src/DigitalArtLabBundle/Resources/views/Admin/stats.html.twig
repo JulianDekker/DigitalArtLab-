@@ -2,10 +2,10 @@
 
 {% block body -%}
     <div class="content-container">
-        <h2 class="h2">Statistieken <span class="h2small">- Alles</span></h2>
+        <h2 class="h2">Statistieken <span class="h2small"></span></h2>
         <form class="timespanform">
             <select>
-                <option value="1">Alles</option>
+                <option value="1">Geen filter</option>
                 <option value="2">Een week</option>
                 <option value="3">Een maand</option>
                 <option value="4">Een half-jaar</option>
@@ -13,8 +13,8 @@
                 <option value="6">Aangepast</option>
             </select>
             <div class="datepicker-container" style="display: none;">
-                <p>Kies een tijdsperiode</p>
-                <input type='text' class="datepicker" id="time1" data-position="right top" /> -
+                <p>Kies een tijdsperiode:</p>
+                <input type='text' class="datepicker" id="time1" data-position="right top" /><p> tot </p>
                 <input type='text' class="datepicker" id="time2" data-position="right top" />
             </div>
         </form>
@@ -89,7 +89,7 @@
                             $('.datepicker-container').slideToggle(300).removeClass('open');
                         }
                         time1 = '0000-01-01';
-                        titel = ' - alles';
+                        titel = '';
                         getStats(time1,time2, titel);
                         break;
                     case 2:
@@ -130,11 +130,33 @@
                         $('.datepicker').change(function() {
                            time1 = $('#time1').val();
                            time2 = $('#time2').val();
-                           titel = '- ' + time1 + '/' + time2;
+                           titel = '- ' + time1 + ' / ' + time2;
                             if (time1  && time2){
-                                getStats(time1,time2, titel);
+                                if (time1 > time2){
+                                    $('#time2').addClass('haserror');
+                                }
+                                else{
+                                    if ($('#time2').hasClass('haserror')){
+                                        $('#time2').removeClass('haserror');
+                                    }
+                                    getStats(time1,time2, titel);
+                                }
                             }
                         });
+                        time1 = $('#time1').val();
+                        time2 = $('#time2').val();
+                        titel = '- ' + time1 + ' / ' + time2;
+                        if (time1  && time2){
+                            if (time1 > time2){
+                                $('#time2').addClass('haserror');
+                            }
+                            else{
+                                if ($('#time2').hasClass('haserror')){
+                                    $('#time2').removeClass('haserror');
+                                }
+                                getStats(time1,time2, titel);
+                            }
+                        }
                         break;
                 }
             });
@@ -180,38 +202,6 @@
                             $('.totalhour').text(response.totaaluren);
                             $('.avaragesession').text(response.avgtime);
                             $('h2.h2 .h2small').text(response.titel);
-
-
-                            {#{% set sumratingsH = '0' %}
-                            {% set sumratingsi = '0' %}
-                            {% set sumratingss = '0' %}
-                            {% for checkin in checkins %}
-                            {% if checkin.sessionduration %}
-                            {% set sumratingsH = sumratingsH + checkin.sessionduration|date('H') / loop.length %}
-                            {% set sumratingsi = sumratingsi + checkin.sessionduration|date('i') / loop.length %}
-                            {% set sumratingss = sumratingss + checkin.sessionduration|date('s') / loop.length %}
-                            {% endif %}
-                            {% endfor %}
-                            {% set sumratingshl = (sumratingsH - sumratingsH|round(0, 'floor')) *60 %}
-                            {% set sumratingsi = sumratingsi + sumratingshl %}
-                            {%  if sumratingsi > 60 %}
-                            {% set sumratingsi = sumratingsi / 60 %}
-                            {% set sumratingsH = sumratingsH + sumratingsi|round(0, 'floor') %}
-                            {% set sumratingsi = (sumratingsi - sumratingsi|round(0, 'floor')) *60 %}
-                            {% endif %}
-                            {% set sumratingsil = (sumratingsi - sumratingsi|round(0, 'floor')) *60 %}
-                            {% set sumratingss = sumratingss + sumratingsil %}
-                            {%  if sumratingss > 60 %}
-                            {% set sumratingss = sumratingss / 60 %}
-                            {% set sumratingsi = sumratingsi + sumratingss|round(0, 'floor') %}
-                            {% set sumratingss = (sumratingss - sumratingss|round(0, 'floor')) *60 %}
-                            {% endif %}
-                        <p>{{  sumratingsH|round(0, 'floor') }}:{{  "%02d"|format(sumratingsi|round(0, 'floor')) }}:{{  "%02d"|format(sumratingss|round)  }}</p>#}
-
-
-
-
-
 
                             var dataPoints = [];
                             for (var key in response.groupsessions) {
